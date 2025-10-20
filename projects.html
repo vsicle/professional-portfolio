@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Vasil Vassilev Software Development Portfolio</title>
+    <meta name="description" content="Explore Vasil Vassilev's software development projects including L3Harris internship work, database design, security research, and full-stack applications.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #B7472A;
+            --accent: #7F8C8D;
+            --background: #FFFFFF;
+            --text: #1A1A1A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(183, 71, 42, 0.3);
+        }
+        
+        /* Project Cards */
+        .project-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Filter Buttons */
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        /* Tech Stack Tags */
+        .tech-tag {
+            transition: all 0.2s ease;
+        }
+        
+        .tech-tag:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Code Block Styling */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        
+        /* Project Stats */
+        .project-stat {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl text-gray-800">
+                    <a href="index.html">Vasil Vassilev</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
+                    <a href="projects.html" class="text-gray-900 font-semibold">Projects</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">About</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-900 font-semibold">Projects</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h1 class="font-display text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+                    My Projects
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A showcase of software development projects demonstrating technical expertise, 
+                    problem-solving abilities, and the discipline learned from professional climbing
+                </p>
+            </div>
+            
+            <!-- Project Stats -->
+            <div class="grid md:grid-cols-4 gap-6 mb-16 fade-in-up">
+                <div class="project-stat rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">5+</div>
+                    <div class="text-gray-600">Major Projects</div>
+                </div>
+                <div class="project-stat rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">8</div>
+                    <div class="text-gray-600">Programming Languages</div>
+                </div>
+                <div class="project-stat rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">3.820</div>
+                    <div class="text-gray-600">GPA</div>
+                </div>
+                <div class="project-stat rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-red-600 mb-2">2+</div>
+                    <div class="text-gray-600">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4 fade-in-up">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="internship">
+                    Internship
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="database">
+                    Database
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="security">
+                    Security
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="web">
+                    Web Development
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="cpp">
+                    C++
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- L3Harris Project -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="internship cpp">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">L3Harris Network Testing Platform</h3>
+                        <p class="text-gray-600 mb-6">
+                            Extended capabilities of internal network testing platform responsible for network traffic generation 
+                            and data analysis. Implemented GPS time sync, multi-chassis support, and configurable profiles for 
+                            test data transfer.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                In-band/out-of-band configurable profiles
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                GPS time synchronization for accurate timing
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                Multi-chassis support for TRex NTG
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                Real-time network traffic analysis
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">C++</span>
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Network Testing</span>
+                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">L3Harris Technologies • Internship</span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="openProjectModal('l3harris')">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LMS Database Project -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="database">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V7M4 7c0-2.21 1.79-4 4-4h8c2.21 0 4 1.79 4 4M4 7h16M9 3v18"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">Learning Management System Database</h3>
+                        <p class="text-gray-600 mb-6">
+                            Designed and implemented a comprehensive relational MySQL database for an LMS system with Student, 
+                            Professor, Department, and TA roles. Scaffolding and integration with C# using LINQ for efficient 
+                            queries and data manipulation.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Database Features:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                Multi-role user management system
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Course enrollment and management
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                Grade tracking and reporting
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                Department and curriculum organization
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">LINQ</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Entity Framework</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">University Project • 2025</span>
+                        <button class="text-green-600 hover:text-green-800 font-medium" onclick="openProjectModal('lms')">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Security Research Project -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="security cpp">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">Security Vulnerability Research</h3>
+                        <p class="text-gray-600 mb-6">
+                            Conducted comprehensive fuzz testing of the Stormlib library using AFL++ and ASAN to discover 
+                            and triage security vulnerabilities. Successfully identified 5 novel security issues and analyzed 
+                            real-world vulnerabilities including buffer overflows and execution redirects.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Security Analysis:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                Fuzz testing with AFL++ and ASAN
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                5 novel vulnerabilities discovered
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                                Buffer overflow analysis
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                Execution redirect exploitation
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">AFL++</span>
+                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">ASAN</span>
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">C/C++</span>
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">gdb</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Security Research • 2024</span>
+                        <button class="text-red-600 hover:text-red-800 font-medium" onclick="openProjectModal('security')">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Web Development Project -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="web">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">Full-Stack Web Applications</h3>
+                        <p class="text-gray-600 mb-6">
+                            Developed multiple web applications using React, Django, and fastAPI frameworks. Implemented 
+                            authentication, authorization, and user roles with deployment to AWS cloud infrastructure.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Web Technologies:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                React frontend with modern UI/UX
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Django and fastAPI backends
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                AWS cloud deployment
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                Authentication and authorization
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">React</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Django</span>
+                        <span class="tech-tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">fastAPI</span>
+                        <span class="tech-tag bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">AWS</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Coursework • 2023-2025</span>
+                        <button class="text-indigo-600 hover:text-indigo-800 font-medium" onclick="openProjectModal('web')">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Projects -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="cpp">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">System-Level Tools</h3>
+                        <p class="text-gray-600 mb-6">
+                            Developed system-level tools and applications in C++ using Agile methodologies. Built and 
+                            integrated a TCP networking library from scratch in C# with efficient database design using 
+                            MySQL and LINQ.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">System Development:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                TCP networking library implementation
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                System-level C++ applications
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                Database-first development approach
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                Cross-functional team collaboration
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">C++</span>
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
+                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">TCP/IP</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Various Projects • 2023-2025</span>
+                        <button class="text-purple-600 hover:text-purple-800 font-medium" onclick="openProjectModal('system')">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Website -->
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="web">
+                    <div class="mb-4">
+                        <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">Professional Portfolio Website</h3>
+                        <p class="text-gray-600 mb-6">
+                            Designed and developed a sophisticated, responsive portfolio website showcasing software development 
+                            projects and professional climbing background. Features modern UI/UX with smooth animations and 
+                            interactive elements.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Website Features:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-pink-500 rounded-full mr-3"></div>
+                                Responsive design with Tailwind CSS
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                Interactive animations and effects
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                Project showcase with filtering
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                Contact form and resume download
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">HTML5</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">CSS3</span>
+                        <span class="tech-tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Tailwind</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Personal Project • 2025</span>
+                        <span class="text-pink-600 font-medium">You're here! 🎉</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 id="modalTitle" class="font-display text-3xl font-bold text-gray-800"></h2>
+                    <button onclick="closeProjectModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="modalContent" class="space-y-6">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="closeProjectModal()" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                            Close
+                        </button>
+                        <a href="contact.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
+                            Discuss This Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gray-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6">
+                Like What You See?
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                I'm always excited to work on challenging projects that push the boundaries of what's possible. 
+                Let's discuss how my skills can contribute to your next project.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Start a Conversation
+                </a>
+                <a href="Vasil Vassilev Resume.pdf" download class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-bold mb-4">Vasil Vassilev</div>
+                <p class="text-gray-400 mb-6">Software Developer & Professional Climber</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://github.com/vsicle" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:vvassilev515@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Vasil Vassilev. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Project modal data
+        const projectData = {
+            l3harris: {
+                title: "L3Harris Network Testing Platform",
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Project Overview</h3>
+                            <p class="text-gray-600">As a Software Development Intern at L3Harris Technologies, I worked on extending the capabilities of their internal network testing platform. This critical system is responsible for network traffic generation and data analysis, supporting the company's advanced communication and defense systems.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Technical Challenges</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Implementing GPS time synchronization for microsecond accuracy in distributed testing environments</li>
+                                <li>• Developing configurable profiles for in-band and out-of-band data transfer scenarios</li>
+                                <li>• Adding multi-chassis support to scale testing capabilities across multiple hardware units</li>
+                                <li>• Optimizing network traffic analysis algorithms for real-time performance</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Technologies Used</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">C#</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">C++</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Network Protocols</span>
+                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">GPS Timing</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Multi-threading</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Impact</h3>
+                            <p class="text-gray-600">The enhanced platform now supports more complex testing scenarios with improved accuracy and scalability, directly contributing to L3Harris's ability to deliver reliable communication systems for critical applications.</p>
+                        </div>
+                    </div>
+                `
+            },
+            lms: {
+                title: "Learning Management System Database",
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Project Overview</h3>
+                            <p class="text-gray-600">Designed and implemented a comprehensive relational database for a Learning Management System (LMS) from the ground up. This project demonstrates advanced database design skills and integration capabilities with modern application frameworks.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Database Design</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Multi-role system supporting Students, Professors, Teaching Assistants, and Administrators</li>
+                                <li>• Complex relationship modeling between courses, enrollments, and academic departments</li>
+                                <li>• Grade tracking system with weighted calculations and transcript generation</li>
+                                <li>• Optimized indexing strategy for high-performance queries</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Implementation Details</h3>
+                            <div class="code-block mb-4">
+                                <code>
+// Example LINQ query for efficient data retrieval
+var studentCourses = await _context.Students
+    .Where(s => s.StudentId == studentId)
+    .Select(s => new {
+        Student = s,
+        Courses = s.Enrollments
+            .Where(e => e.Semester == currentSemester)
+            .Select(e => e.Course)
+            .ToList()
+    })
+    .FirstOrDefaultAsync();
+                                </code>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Technologies Used</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">MySQL</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">C#</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">LINQ</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Entity Framework</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            security: {
+                title: "Security Vulnerability Research",
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Research Overview</h3>
+                            <p class="text-gray-600">Conducted comprehensive security analysis of the Stormlib library using advanced fuzzing techniques and vulnerability discovery tools. This research demonstrates deep understanding of cybersecurity principles and practical application of security testing methodologies.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Discovery Process</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Implemented AFL++ (American Fuzzy Lop) for intelligent fuzz testing</li>
+                                <li>• Used AddressSanitizer (ASAN) to detect memory corruption issues</li>
+                                <li>• Analyzed and triaged 5 novel security vulnerabilities</li>
+                                <li>• Documented exploitation techniques for educational purposes</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Vulnerabilities Discovered</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-red-800 mb-2">Buffer Overflows</h4>
+                                    <p class="text-sm text-red-700">Memory corruption vulnerabilities that could lead to arbitrary code execution</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-orange-800 mb-2">Execution Redirects</h4>
+                                    <p class="text-sm text-orange-700">Control flow hijacking through manipulated function pointers</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Technologies Used</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">AFL++</span>
+                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">ASAN</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">C/C++</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">gdb</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Wireshark</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Initialize page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Initialize project filters
+            initProjectFilters();
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Project filter functionality
+        function initProjectFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (filter === 'all' || categories.includes(filter)) {
+                            card.style.display = 'block';
+                            anime({
+                                targets: card,
+                                opacity: [0, 1],
+                                scale: [0.8, 1],
+                                duration: 400,
+                                easing: 'easeOutQuart'
+                            });
+                        } else {
+                            anime({
+                                targets: card,
+                                opacity: [1, 0],
+                                scale: [1, 0.8],
+                                duration: 300,
+                                easing: 'easeInQuart',
+                                complete: function() {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        }
+
+        // Modal functionality
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const project = projectData[projectId];
+            if (project) {
+                title.textContent = project.title;
+                content.innerHTML = project.content;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+            }
+        });
+    </script>
+</body>
+</html>

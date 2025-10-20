@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Vasil Vassilev - From Professional Climbing to Software Development</title>
+    <meta name="description" content="Learn about Vasil Vassilev's journey from professional sport climbing to software development. Discover how athletic discipline translates to coding excellence.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #B7472A;
+            --accent: #7F8C8D;
+            --background: #FFFFFF;
+            --text: #1A1A1A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: linear-gradient(to bottom, var(--secondary), transparent);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        /* Image Carousel */
+        .splide__slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        /* Achievement Cards */
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        /* Skills Transfer Section */
+        .skill-transfer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl text-gray-800">
+                    <a href="index.html">Vasil Vassilev</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
+                    <a href="about.html" class="text-gray-900 font-semibold">About</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Projects</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 font-semibold">About</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Projects</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h1 class="font-display text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+                    My Journey
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    From professional sport climbing to software development - a story of discipline, 
+                    precision, and the relentless pursuit of excellence
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in-up">
+                    <img src="resources/headshot.jpg" alt="Vasil Vassilev" 
+                         class="w-full max-w-md mx-auto rounded-2xl shadow-2xl">
+                </div>
+                
+                <div class="fade-in-up">
+                    <h2 class="font-display text-3xl font-bold text-gray-800 mb-6">
+                        The Intersection of Athletics and Technology
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        My journey began on climbing walls, where every move requires calculated precision, 
+                        strategic thinking, and unwavering focus. These same principles now guide my approach 
+                        to software development, where I tackle complex problems with the same determination 
+                        that took me to the top of competitive climbing.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Currently pursuing my Software Development degree at the University of Utah with a 3.820 GPA, 
+                        I'm combining my athletic discipline with cutting-edge technical skills to build robust, 
+                        secure, and scalable software solutions.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">3.820</div>
+                            <div class="text-gray-600">GPA</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">2026</div>
+                            <div class="text-gray-600">Graduation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Climbing Achievements -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                    Professional Climbing Career
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Years of competitive climbing taught me invaluable lessons about persistence, 
+                    problem-solving, and pushing beyond perceived limits
+                </p>
+            </div>
+            
+            <!-- Image Gallery -->
+            <div class="mb-16 fade-in-up">
+                <div class="splide" id="climbing-gallery">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide">
+                                <img src="resources/climbing-competition-1.jpg" alt="Climbing competition">
+                                <div class="absolute bottom-4 left-4 text-white bg-black/50 p-3 rounded">
+                                    <h3 class="font-semibold">International Competition</h3>
+                                    <p class="text-sm">Precision and focus under pressure</p>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <img src="resources/climbing-competition-2.jpg" alt="Professional climbing">
+                                <div class="absolute bottom-4 left-4 text-white bg-black/50 p-3 rounded">
+                                    <h3 class="font-semibold">Route Analysis</h3>
+                                    <p class="text-sm">Strategic problem-solving in action</p>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <img src="resources/climbing-achievement.jpg" alt="Climbing achievement">
+                                <div class="absolute bottom-4 left-4 text-white bg-black/50 p-3 rounded">
+                                    <h3 class="font-semibold">Achievement Moment</h3>
+                                    <p class="text-sm">Years of dedication paying off</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Achievement Cards -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="achievement-card rounded-2xl p-6 hover-lift fade-in-up">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-center mb-3 text-gray-800">Competition Experience</h3>
+                    <p class="text-gray-600 text-center">Years of competing at the highest levels of sport climbing, developing mental toughness and strategic thinking under pressure.</p>
+                </div>
+                
+                <div class="achievement-card rounded-2xl p-6 hover-lift fade-in-up">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-center mb-3 text-gray-800">Problem Solving</h3>
+                    <p class="text-gray-600 text-center">Every climbing route is a unique puzzle requiring creative solutions, analytical thinking, and adaptive strategies.</p>
+                </div>
+                
+                <div class="achievement-card rounded-2xl p-6 hover-lift fade-in-up">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-center mb-3 text-gray-800">Discipline & Focus</h3>
+                    <p class="text-gray-600 text-center">Years of training instilled unwavering discipline, mental focus, and the ability to perform under intense pressure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Transfer Section -->
+    <section class="py-20 skill-transfer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                    Translating Climbing Skills to Code
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The principles that made me successful in climbing are the same ones that drive my programming excellence
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Climbing Skills -->
+                <div class="fade-in-up">
+                    <h3 class="font-display text-2xl font-bold text-gray-800 mb-8 text-center">Climbing Excellence</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">Route Analysis</h4>
+                            </div>
+                            <p class="text-gray-600">Breaking down complex routes into manageable sequences, identifying key challenges and planning optimal approaches.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">Problem Decomposition</h4>
+                            </div>
+                            <p class="text-gray-600">Approaching each climbing problem systematically, testing solutions, and adapting strategies based on results.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">Precision & Control</h4>
+                            </div>
+                            <p class="text-gray-600">Executing each movement with exact precision, maintaining control even in high-pressure situations.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Programming Skills -->
+                <div class="fade-in-up">
+                    <h3 class="font-display text-2xl font-bold text-gray-800 mb-8 text-center">Programming Excellence</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">System Architecture</h4>
+                            </div>
+                            <p class="text-gray-600">Designing robust software systems by breaking down complex problems into manageable, interconnected components.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">Debugging & Testing</h4>
+                            </div>
+                            <p class="text-gray-600">Systematically identifying and resolving software issues through methodical testing and iterative improvement.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                                <h4 class="font-semibold text-gray-800">Code Quality & Security</h4>
+                            </div>
+                            <p class="text-gray-600">Writing clean, efficient, and secure code with attention to detail and best practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Timeline -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                    Education & Career Timeline
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A journey of continuous learning and growth, from climbing gyms to computer science labs
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <div class="timeline-item fade-in-up">
+                        <div class="bg-white rounded-xl p-8 shadow-lg hover-lift">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-bold text-gray-800">University of Utah</h3>
+                                <span class="text-blue-600 font-semibold">2022 - 2026</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Bachelor of Science in Software Development</h4>
+                            <p class="text-gray-600 mb-4">
+                                Pursuing comprehensive education in software development with focus on full-stack development, 
+                                cybersecurity, and database design. Maintaining a 3.820 GPA while actively participating in 
+                                advanced coursework and practical projects.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">GPA: 3.820</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Dean's List</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">CS Honors</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up">
+                        <div class="bg-white rounded-xl p-8 shadow-lg hover-lift">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-bold text-gray-800">L3Harris Technologies</h3>
+                                <span class="text-green-600 font-semibold">2024 - Present</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Software Development Intern</h4>
+                            <p class="text-gray-600 mb-4">
+                                Working closely with L3Harris engineers to extend capabilities of internal network testing 
+                                platform. Developing features for network traffic generation, data analysis, GPS time sync, 
+                                and multi-chassis support using C# and C++.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">C++</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Network Testing</span>
+                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in-up">
+                        <div class="bg-white rounded-xl p-8 shadow-lg hover-lift">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-bold text-gray-800">Professional Sport Climbing</h3>
+                                <span class="text-red-600 font-semibold">2018 - 2022</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Competitive Athlete</h4>
+                            <p class="text-gray-600 mb-4">
+                                Competed at the highest levels of sport climbing, developing exceptional problem-solving skills, 
+                                mental toughness, and strategic thinking. This experience provided the foundation for my 
+                                approach to software development and technical challenges.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Problem Solving</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Discipline</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Strategic Thinking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gray-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6">
+                Ready to Work Together?
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                I'm passionate about applying my unique blend of climbing discipline and technical skills 
+                to solve complex software development challenges.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Get In Touch
+                </a>
+                <a href="projects.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
+                    View My Work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-bold mb-4">Vasil Vassilev</div>
+                <p class="text-gray-400 mb-6">Software Developer & Professional Climber</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://github.com/vsicle" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:vvassilev515@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Vasil Vassilev. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Initialize image carousel
+            const splide = new Splide('#climbing-gallery', {
+                type: 'loop',
+                perPage: 1,
+                autoplay: true,
+                interval: 4000,
+                arrows: true,
+                pagination: true,
+                gap: '1rem'
+            });
+            splide.mount();
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
