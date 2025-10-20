@@ -38,6 +38,11 @@
             color: var(--text);
             overflow-x: hidden;
         }
+
+        /* Prefer native smooth-scroll for anchor navigation */
+        html {
+            scroll-behavior: smooth;
+        }
         
         .font-display {
             font-family: 'Playfair Display', serif;
@@ -53,7 +58,10 @@
             position: relative;
             overflow: hidden;
         }
-        
+
+        /* decorative pattern sits in a pseudo-element. We animate its background-position
+           and apply the parallax transform only to the pseudo-element via a CSS variable
+           to avoid moving the whole section (which causes layout overlap and jank). */
         .hero-bg::before {
             content: '';
             position: absolute;
@@ -62,12 +70,26 @@
             right: 0;
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background-repeat: repeat;
+            background-position: 0 0;
             animation: gridMove 20s linear infinite;
+            will-change: transform, background-position;
+            /* move only the decorative layer using a CSS variable so the section flow is unchanged */
+            transform: translateY(var(--parallax, 0px));
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.12;
         }
-        
+
         @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(10px, 10px); }
+            0% { background-position: 0 0; }
+            100% { background-position: 10px 10px; }
+        }
+
+        /* ensure content inside hero sits above the pseudo-element */
+        .hero-bg .max-w-7xl {
+            position: relative;
+            z-index: 1;
         }
         
         /* Navigation */
@@ -109,6 +131,18 @@
         /* Skills Chart */
         #skillsChart {
             height: 400px;
+        }
+
+        /* Prevent heading overlap with the chart - add extra top spacing for the skills section
+           and ensure the chart area has internal padding so the chart title/labels don't collide
+           with the document H2 on smaller viewports. */
+        .skills-section {
+            padding-top: 2.5rem; /* extra breathing room above the chart */
+        }
+
+        #skillsChart {
+            padding-top: 1.2rem;
+            box-sizing: border-box;
         }
         
         /* Project Cards */
@@ -225,7 +259,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-gray-50 skills-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-up">
                 <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">

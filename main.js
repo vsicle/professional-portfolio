@@ -17,21 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function initTypewriter() {
     const typed = new Typed('#typed-name', {
         strings: ['Vasil Vassilev'],
-        typeSpeed: 100,
+        typeSpeed: 50,
         startDelay: 500,
         showCursor: true,
         cursorChar: '|',
-        onComplete: function() {
-            // Animate the rest of the hero content after name is typed
-            anime({
-                targets: '.hero-content p, .hero-content .flex, .hero-content .items-center',
-                opacity: [0, 1],
-                translateY: [20, 0],
-                delay: anime.stagger(200),
-                duration: 800,
-                easing: 'easeOutQuart'
-            });
-        }
     });
 }
 
@@ -76,16 +65,10 @@ function initSkillsChart() {
     
     const myChart = echarts.init(chartDom);
     
+    // Title is intentionally omitted here because the page already renders an H2 above
+    // the chart. Including the ECharts title caused a duplicate label and visual overlap
+    // with the document heading on some viewports.
     const option = {
-        title: {
-            text: 'Technical Skills Overview',
-            left: 'center',
-            textStyle: {
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: '#2C3E50'
-            }
-        },
         tooltip: {
             trigger: 'item'
         },
@@ -354,16 +337,41 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Parallax effect for hero background
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero-bg');
-    
-    parallaxElements.forEach(element => {
-        const speed = 0.5;
-        element.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
+// Parallax effect for hero background (optimized)
+// Instead of moving the whole `.hero-bg` (which triggers layout and can cause overlap and jank),
+// we update a CSS variable used by the pseudo-element. This keeps layout stable and leverages
+// the compositor for smooth transforms.
+(function() {
+    const hero = document.querySelector('.hero-bg');
+    if (!hero) return;
+
+    let latestScrollY = 0;
+    let ticking = false;
+    const speed = 0.25; // gentle parallax
+
+    function onScroll() {
+        latestScrollY = window.pageYOffset || document.documentElement.scrollTop;
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }
+
+    function update() {
+        const offset = Math.round(latestScrollY * speed);
+        // set CSS variable on the hero element; used by the ::before transform
+        hero.style.setProperty('--parallax', offset + 'px');
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // update once in case user isn't scrolling but page loads scrolled
+    update();
+})();
 
 // Add loading animation
 window.addEventListener('load', function() {
