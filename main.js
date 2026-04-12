@@ -249,18 +249,43 @@ function initContactForm() {
 
 // Resume email and download functionality
 function initResumeFunctions() {
-    const emailResumeBtn = document.getElementById('emailResumeBtn');
-    if (emailResumeBtn) {
-        emailResumeBtn.addEventListener('click', function() {
-            const resumeUrl = getResumeUrl();
-            const subject = encodeURIComponent(RESUME_EMAIL_SUBJECT);
-            const body = encodeURIComponent(
-                `Hi,\n\nI'm sharing Vasil Vassilev's resume.\n\nResume link: ${resumeUrl}\n\nBest regards,`
-            );
+    const resumeRequestForm = document.getElementById('resumeRequestForm');
+    if (resumeRequestForm) {
+        resumeRequestForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-            copyTextToClipboard(resumeUrl);
-            window.location.href = `mailto:?subject=${subject}&body=${body}`;
-            showNotification('Email draft opened and resume link copied.', 'info');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const emailInput = this.querySelector('input[name="email"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/send-resume', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value.trim()
+                    })
+                });
+
+                const payload = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(payload.error || 'Resume request failed.');
+                }
+
+                this.reset();
+                showNotification('Resume email sent successfully.', 'success');
+            } catch (error) {
+                showNotification(error.message || 'Unable to send resume right now.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
     
@@ -293,14 +318,6 @@ function initResumeFunctions() {
 
 function getResumeUrl() {
     return new URL(encodeURI(RESUME_FILE_PATH), window.location.href).href;
-}
-
-function copyTextToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).catch(() => {
-            // Ignore clipboard failures; the email draft still contains the resume link.
-        });
-    }
 }
 
 function formatSubject(subject) {
