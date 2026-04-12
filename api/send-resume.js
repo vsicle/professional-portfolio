@@ -39,6 +39,10 @@ async function sendEmail({ apiKey, from, to, subject, html, replyTo }) {
     }
 }
 
+function isTestingRestriction(error) {
+    return /You can only send testing emails to your own email address/i.test(error.message);
+}
+
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST');
@@ -68,21 +72,6 @@ module.exports = async (req, res) => {
         await sendEmail({
             apiKey: resendApiKey,
             from: fromEmail,
-            to: recipient,
-            subject: 'Vasil Vassilev Resume',
-            replyTo: notifyEmail,
-            html: `
-                <p>Hi,</p>
-                <p>Thanks for requesting my resume.</p>
-                <p>You can view or download it here:</p>
-                <p><a href="${resumeUrl}">${resumeUrl}</a></p>
-                <p>Best,<br>Vasil Vassilev</p>
-            `
-        });
-
-        await sendEmail({
-            apiKey: resendApiKey,
-            from: fromEmail,
             to: notifyEmail,
             subject: 'Resume requested from portfolio site',
             replyTo: recipient,
@@ -96,8 +85,31 @@ module.exports = async (req, res) => {
             `
         });
 
+        await sendEmail({
+            apiKey: resendApiKey,
+            from: fromEmail,
+            to: recipient,
+            subject: 'Vasil Vassilev Resume',
+            replyTo: notifyEmail,
+            html: `
+                <p>Hi,</p>
+                <p>Thanks for requesting my resume.</p>
+                <p>You can view or download it here:</p>
+                <p><a href="${resumeUrl}">${resumeUrl}</a></p>
+                <p>Best,<br>Vasil Vassilev</p>
+            `
+        });
         return json(res, 200, { ok: true });
     } catch (error) {
+        if (isTestingRestriction(error)) {
+            return json(res, 200, {
+                ok: true,
+                delivery: 'download_only',
+                resumeUrl: `${getSiteUrl(req)}${RESUME_PATH}`,
+                message: 'Resume email delivery to external addresses is blocked until a sending domain is verified. The request was still logged.'
+            });
+        }
+
         return json(res, 500, { error: 'Unable to send the resume email right now.' });
     }
 };

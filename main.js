@@ -220,7 +220,7 @@ function initProjectFilters() {
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
@@ -229,20 +229,36 @@ function initContactForm() {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
-            const subjectLine = `${formatSubject(data.subject)} - ${data.firstName} ${data.lastName}`.trim();
-            const body = [
-                `Name: ${data.firstName} ${data.lastName}`,
-                `Email: ${data.email}`,
-                `Company: ${data.company || 'N/A'}`,
-                '',
-                data.message
-            ].join('\n');
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        email: data.email,
+                        company: data.company,
+                        subject: formatSubject(data.subject),
+                        message: data.message
+                    })
+                });
 
-            const mailtoLink = `mailto:vvassilev515@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
-            showNotification('Your email app opened with the message draft.', 'success');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+                const payload = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(payload.error || 'Message delivery failed.');
+                }
+
+                this.reset();
+                showNotification('Message sent successfully.', 'success');
+            } catch (error) {
+                showNotification(error.message || 'Unable to send your message right now.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
 }
@@ -279,7 +295,12 @@ function initResumeFunctions() {
                 }
 
                 this.reset();
-                showNotification('Resume email sent successfully.', 'success');
+                if (payload.delivery === 'download_only' && payload.resumeUrl) {
+                    window.open(payload.resumeUrl, '_blank', 'noopener');
+                    showNotification('Email delivery is limited until the sending domain is verified. The resume opened directly, and the request was logged.', 'warning');
+                } else {
+                    showNotification('Resume email sent successfully.', 'success');
+                }
             } catch (error) {
                 showNotification(error.message || 'Unable to send resume right now.', 'error');
             } finally {
