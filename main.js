@@ -2,6 +2,8 @@
 // Handles animations, interactions, and dynamic content
 
 document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('js-animations');
+
     // Initialize all functionality
     initTypewriter();
     initScrollAnimations();
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const RESUME_FILE_PATH = 'Vasil Vassilev Resume.pdf';
+const RESUME_EMAIL_SUBJECT = 'Vasil Vassilev Resume';
 
 // Typewriter effect for hero section
 function initTypewriter() {
@@ -246,22 +249,18 @@ function initContactForm() {
 
 // Resume email and download functionality
 function initResumeFunctions() {
-    // Email resume functionality
     const emailResumeBtn = document.getElementById('emailResumeBtn');
     if (emailResumeBtn) {
         emailResumeBtn.addEventListener('click', function() {
-            const recipient = prompt('Enter recipient email address:');
-            if (recipient && isValidEmail(recipient)) {
-                const resumeUrl = new URL(encodeURI(RESUME_FILE_PATH), window.location.href).href;
-                const subject = encodeURIComponent('Vasil Vassilev - Resume');
-                const body = encodeURIComponent(`Hi there,\n\nI wanted to share Vasil Vassilev's resume with you.\n\nDirect resume link: ${resumeUrl}\n\nBest regards,\nVasil Vassilev`);
-                const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
-                window.location.href = mailtoLink;
+            const resumeUrl = getResumeUrl();
+            const subject = encodeURIComponent(RESUME_EMAIL_SUBJECT);
+            const body = encodeURIComponent(
+                `Hi,\n\nI'm sharing Vasil Vassilev's resume.\n\nResume link: ${resumeUrl}\n\nBest regards,`
+            );
 
-                showNotification('Email client opened with a direct resume link.', 'info');
-            } else if (recipient) {
-                showNotification('Please enter a valid email address', 'error');
-            }
+            copyTextToClipboard(resumeUrl);
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+            showNotification('Email draft opened and resume link copied.', 'info');
         });
     }
     
@@ -279,7 +278,7 @@ function initResumeFunctions() {
             }
 
             const link = document.createElement('a');
-            link.href = RESUME_FILE_PATH;
+            link.href = getResumeUrl();
             link.download = 'Vasil_Vassilev_Resume.pdf';
             document.body.appendChild(link);
             link.click();
@@ -292,6 +291,18 @@ function initResumeFunctions() {
 
 // Utility Functions
 
+function getResumeUrl() {
+    return new URL(encodeURI(RESUME_FILE_PATH), window.location.href).href;
+}
+
+function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => {
+            // Ignore clipboard failures; the email draft still contains the resume link.
+        });
+    }
+}
+
 function formatSubject(subject) {
     const labels = {
         'job-opportunity': 'Job Opportunity',
@@ -302,11 +313,6 @@ function formatSubject(subject) {
     };
 
     return labels[subject] || 'Portfolio Inquiry';
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
 }
 
 function showNotification(message, type = 'info') {
