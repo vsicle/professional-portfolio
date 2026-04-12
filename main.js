@@ -13,8 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initResumeFunctions();
 });
 
+const RESUME_FILE_PATH = 'Vasil Vassilev Resume.pdf';
+
 // Typewriter effect for hero section
 function initTypewriter() {
+    const typedTarget = document.querySelector('#typed-name');
+    if (!typedTarget || typeof Typed !== 'function') {
+        return;
+    }
+
     const typed = new Typed('#typed-name', {
         strings: ['Vasil Vassilev'],
         typeSpeed: 50,
@@ -212,24 +219,27 @@ function initContactForm() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
-            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
-            
-            // Simulate form submission (replace with actual endpoint)
-            setTimeout(() => {
-                showNotification('Message sent successfully!', 'success');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+
+            const subjectLine = `${formatSubject(data.subject)} - ${data.firstName} ${data.lastName}`.trim();
+            const body = [
+                `Name: ${data.firstName} ${data.lastName}`,
+                `Email: ${data.email}`,
+                `Company: ${data.company || 'N/A'}`,
+                '',
+                data.message
+            ].join('\n');
+
+            const mailtoLink = `mailto:vvassilev515@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+            showNotification('Your email app opened with the message draft.', 'success');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
     }
 }
@@ -242,14 +252,13 @@ function initResumeFunctions() {
         emailResumeBtn.addEventListener('click', function() {
             const recipient = prompt('Enter recipient email address:');
             if (recipient && isValidEmail(recipient)) {
-                const subject = encodeURIComponent('Vasil Vassilev - Software Developer Resume');
-                const body = encodeURIComponent(`Hi there,\n\nI wanted to share my resume with you. Please find it attached.\n\nBest regards,\nVasil Vassilev`);
-                
-                // Create mailto link with resume attachment
+                const resumeUrl = new URL(encodeURI(RESUME_FILE_PATH), window.location.href).href;
+                const subject = encodeURIComponent('Vasil Vassilev - Resume');
+                const body = encodeURIComponent(`Hi there,\n\nI wanted to share Vasil Vassilev's resume with you.\n\nDirect resume link: ${resumeUrl}\n\nBest regards,\nVasil Vassilev`);
                 const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
                 window.location.href = mailtoLink;
-                
-                showNotification('Email client opened with resume attachment', 'info');
+
+                showNotification('Email client opened with a direct resume link.', 'info');
             } else if (recipient) {
                 showNotification('Please enter a valid email address', 'error');
             }
@@ -262,15 +271,15 @@ function initResumeFunctions() {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Track download
-            gtag('event', 'resume_download', {
-                event_category: 'engagement',
-                event_label: 'resume_pdf'
-            });
-            
-            // Trigger download
+            if (typeof gtag === 'function') {
+                gtag('event', 'resume_download', {
+                    event_category: 'engagement',
+                    event_label: 'resume_pdf'
+                });
+            }
+
             const link = document.createElement('a');
-            link.href = 'Vasil Vassilev Resume.pdf';
+            link.href = RESUME_FILE_PATH;
             link.download = 'Vasil_Vassilev_Resume.pdf';
             document.body.appendChild(link);
             link.click();
@@ -282,6 +291,18 @@ function initResumeFunctions() {
 }
 
 // Utility Functions
+
+function formatSubject(subject) {
+    const labels = {
+        'job-opportunity': 'Job Opportunity',
+        'freelance-project': 'Freelance Project',
+        collaboration: 'Collaboration',
+        internship: 'Internship',
+        'general-inquiry': 'General Inquiry'
+    };
+
+    return labels[subject] || 'Portfolio Inquiry';
+}
 
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
