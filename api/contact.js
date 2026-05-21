@@ -5,6 +5,32 @@ function json(res, statusCode, payload) {
     res.send(JSON.stringify(payload));
 }
 
+function parseBody(req) {
+    if (typeof req.body !== 'string') {
+        return req.body || {};
+    }
+
+    try {
+        return JSON.parse(req.body || '{}');
+    } catch {
+        return null;
+    }
+}
+
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[char]));
+}
+
+function formatMessage(value) {
+    return escapeHtml(value).replace(/\n/g, '<br>');
+}
+
 async function sendEmail({ apiKey, from, to, subject, html, replyTo }) {
     const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -41,7 +67,11 @@ module.exports = async (req, res) => {
         return json(res, 500, { error: 'Contact email service is not configured.' });
     }
 
-    const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+    const body = parseBody(req);
+    if (!body || typeof body !== 'object') {
+        return json(res, 400, { error: 'Invalid request body.' });
+    }
+
     const firstName = String(body.firstName || '').trim();
     const lastName = String(body.lastName || '').trim();
     const email = String(body.email || '').trim().toLowerCase();
@@ -63,13 +93,13 @@ module.exports = async (req, res) => {
             html: `
                 <p>A new portfolio contact form message was submitted.</p>
                 <ul>
-                    <li><strong>Name:</strong> ${firstName} ${lastName}</li>
-                    <li><strong>Email:</strong> ${email}</li>
-                    <li><strong>Company:</strong> ${company || 'N/A'}</li>
-                    <li><strong>Subject:</strong> ${subject}</li>
+                    <li><strong>Name:</strong> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</li>
+                    <li><strong>Email:</strong> ${escapeHtml(email)}</li>
+                    <li><strong>Company:</strong> ${company ? escapeHtml(company) : 'N/A'}</li>
+                    <li><strong>Subject:</strong> ${escapeHtml(subject)}</li>
                 </ul>
                 <p><strong>Message:</strong></p>
-                <p>${message.replace(/\n/g, '<br>')}</p>
+                <p>${formatMessage(message)}</p>
             `
         });
 

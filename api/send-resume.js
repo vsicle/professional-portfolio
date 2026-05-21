@@ -17,6 +17,28 @@ function json(res, statusCode, payload) {
     res.send(JSON.stringify(payload));
 }
 
+function parseBody(req) {
+    if (typeof req.body !== 'string') {
+        return req.body || {};
+    }
+
+    try {
+        return JSON.parse(req.body || '{}');
+    } catch {
+        return null;
+    }
+}
+
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[char]));
+}
+
 async function sendEmail({ apiKey, from, to, subject, html, replyTo }) {
     const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -57,7 +79,11 @@ module.exports = async (req, res) => {
         return json(res, 500, { error: 'Resume email service is not configured.' });
     }
 
-    const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+    const body = parseBody(req);
+    if (!body || typeof body !== 'object') {
+        return json(res, 400, { error: 'Invalid request body.' });
+    }
+
     const recipient = String(body.email || '').trim().toLowerCase();
 
     if (!EMAIL_REGEX.test(recipient)) {
@@ -67,6 +93,8 @@ module.exports = async (req, res) => {
     try {
         const siteUrl = getSiteUrl(req);
         const resumeUrl = `${siteUrl}${RESUME_PATH}`;
+        const safeRecipient = escapeHtml(recipient);
+        const safeResumeUrl = escapeHtml(resumeUrl);
         const requestedAt = new Date().toISOString();
 
         await sendEmail({
@@ -78,9 +106,9 @@ module.exports = async (req, res) => {
             html: `
                 <p>A visitor requested the resume from the portfolio site.</p>
                 <ul>
-                    <li><strong>Email:</strong> ${recipient}</li>
-                    <li><strong>Time (UTC):</strong> ${requestedAt}</li>
-                    <li><strong>Resume URL:</strong> <a href="${resumeUrl}">${resumeUrl}</a></li>
+                    <li><strong>Email:</strong> ${safeRecipient}</li>
+                    <li><strong>Time (UTC):</strong> ${escapeHtml(requestedAt)}</li>
+                    <li><strong>Resume URL:</strong> <a href="${safeResumeUrl}">${safeResumeUrl}</a></li>
                 </ul>
             `
         });
@@ -95,7 +123,7 @@ module.exports = async (req, res) => {
                 <p>Hi,</p>
                 <p>Thanks for requesting my resume.</p>
                 <p>You can view or download it here:</p>
-                <p><a href="${resumeUrl}">${resumeUrl}</a></p>
+                <p><a href="${safeResumeUrl}">${safeResumeUrl}</a></p>
                 <p>Best,<br>Vasil Vassilev</p>
             `
         });

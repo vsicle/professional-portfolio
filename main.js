@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initSkillsChart();
     initMobileMenu();
     initSmoothScroll();
-    initProjectFilters();
     initContactForm();
     initResumeFunctions();
+    initCopyEmailLinks();
 });
 
 const RESUME_FILE_PATH = 'Vasil Vassilev Resume.pdf';
-const RESUME_EMAIL_SUBJECT = 'Vasil Vassilev Resume';
+const CONTACT_EMAIL = 'vvassilev515@gmail.com';
 
 // Typewriter effect for hero section
 function initTypewriter() {
@@ -25,7 +25,7 @@ function initTypewriter() {
         return;
     }
 
-    const typed = new Typed('#typed-name', {
+    new Typed('#typed-name', {
         strings: ['Vasil Vassilev'],
         typeSpeed: 50,
         startDelay: 500,
@@ -48,7 +48,7 @@ function initScrollAnimations() {
                 
                 // Add staggered animation for child elements
                 const children = entry.target.querySelectorAll('.project-card, .bg-white');
-                if (children.length > 0) {
+                if (children.length > 0 && typeof anime === 'function') {
                     anime({
                         targets: children,
                         opacity: [0, 1],
@@ -71,7 +71,7 @@ function initScrollAnimations() {
 // Skills radar chart using ECharts
 function initSkillsChart() {
     const chartDom = document.getElementById('skillsChart');
-    if (!chartDom) return;
+    if (!chartDom || typeof echarts === 'undefined') return;
     
     const myChart = echarts.init(chartDom);
     
@@ -170,48 +170,6 @@ function initSmoothScroll() {
                     behavior: 'smooth'
                 });
             }
-        });
-    });
-}
-
-// Project filtering (for projects page)
-function initProjectFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-item');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.getAttribute('data-filter');
-            
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter projects
-            projectCards.forEach(card => {
-                const categories = card.getAttribute('data-category').split(' ');
-                if (filter === 'all' || categories.includes(filter)) {
-                    card.style.display = 'block';
-                    anime({
-                        targets: card,
-                        opacity: [0, 1],
-                        scale: [0.8, 1],
-                        duration: 400,
-                        easing: 'easeOutQuart'
-                    });
-                } else {
-                    anime({
-                        targets: card,
-                        opacity: [1, 0],
-                        scale: [1, 0.8],
-                        duration: 300,
-                        easing: 'easeInQuart',
-                        complete: function() {
-                            card.style.display = 'none';
-                        }
-                    });
-                }
-            });
         });
     });
 }
@@ -335,10 +293,51 @@ function initResumeFunctions() {
     });
 }
 
+function initCopyEmailLinks() {
+    document.querySelectorAll('[data-copy-email]').forEach(link => {
+        link.addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            const email = this.getAttribute('data-copy-email') || CONTACT_EMAIL;
+
+            try {
+                await copyTextToClipboard(email);
+                showNotification('Email address copied to clipboard.', 'success');
+            } catch {
+                showNotification(`Copy failed. Email address: ${email}`, 'error');
+            }
+        });
+    });
+}
+
 // Utility Functions
 
 function getResumeUrl() {
     return new URL(encodeURI(RESUME_FILE_PATH), window.location.href).href;
+}
+
+async function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '-1000px';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    const copied = document.execCommand('copy');
+    textarea.remove();
+
+    if (!copied) {
+        throw new Error('Clipboard unavailable.');
+    }
 }
 
 function formatSubject(subject) {
@@ -373,16 +372,26 @@ function showNotification(message, type = 'info') {
             notification.classList.add('bg-blue-500', 'text-white');
     }
     
-    notification.innerHTML = `
-        <div class="flex items-center">
-            <span class="flex-1">${message}</span>
-            <button class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.parentElement.remove()">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
+    const content = document.createElement('div');
+    content.className = 'flex items-center';
+
+    const messageElement = document.createElement('span');
+    messageElement.className = 'flex-1';
+    messageElement.textContent = message;
+
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'ml-4 text-white hover:text-gray-200';
+    closeButton.setAttribute('aria-label', 'Dismiss notification');
+    closeButton.innerHTML = `
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
     `;
+    closeButton.addEventListener('click', () => notification.remove());
+
+    content.append(messageElement, closeButton);
+    notification.appendChild(content);
     
     document.body.appendChild(notification);
     
@@ -447,36 +456,12 @@ window.addEventListener('load', function() {
     }
     
     // Animate page entrance
-    anime({
-        targets: 'body',
-        opacity: [0, 1],
-        duration: 500,
-        easing: 'easeOutQuart'
-    });
+    if (typeof anime === 'function') {
+        anime({
+            targets: 'body',
+            opacity: [0, 1],
+            duration: 500,
+            easing: 'easeOutQuart'
+        });
+    }
 });
-
-// Error handling for missing elements
-window.addEventListener('error', function(e) {
-    console.warn('Portfolio script error:', e.error);
-    // Continue execution even if some features fail
-});
-
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(function() {
-    // Scroll-based animations here
-}, 16); // ~60fps
-
-window.addEventListener('scroll', debouncedScrollHandler);
