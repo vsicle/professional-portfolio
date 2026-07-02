@@ -3,528 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Vasil Vassilev - Software Developer & Professional Climber</title>
-    <meta name="description" content="Get in touch with Vasil Vassilev for software development opportunities. Download resume, send email, or connect for your next project.">
+    <title>Contact — Vasil Vassilev</title>
+    <meta name="description" content="Get in touch with Vasil Vassilev — software engineer in Salt Lake City. Actively seeking software engineering roles, Salt Lake City or remote.">
+    <link rel="canonical" href="https://www.vasilvassilev.cc/contact.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.vasilvassilev.cc/contact.html">
+    <meta property="og:title" content="Contact — Vasil Vassilev">
+    <meta property="og:description" content="Get in touch with Vasil Vassilev — software engineer in Salt Lake City. Actively seeking software engineering roles, Salt Lake City or remote.">
+    <meta property="og:image" content="https://www.vasilvassilev.cc/resources/climbing-3.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact — Vasil Vassilev">
+    <meta name="twitter:description" content="Get in touch with Vasil Vassilev — software engineer in Salt Lake City. Actively seeking software engineering roles, Salt Lake City or remote.">
+    <meta name="twitter:image" content="https://www.vasilvassilev.cc/resources/climbing-3.jpg">
+
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Core Libraries -->
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    
-    <style>
-        :root {
-            --primary: #2C3E50;
-            --secondary: #B7472A;
-            --accent: #7F8C8D;
-            --background: #FFFFFF;
-            --text: #1A1A1A;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            overflow-x: hidden;
-        }
-        
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        /* Navigation */
-        .nav-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        /* Animations */
-        .fade-in-up {
-            opacity: 1;
-            transform: translateY(0);
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-        }
-        
-        .fade-in-up.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Hover Effects */
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .hover-glow {
-            transition: all 0.3s ease;
-        }
-        
-        .hover-glow:hover {
-            box-shadow: 0 0 20px rgba(183, 71, 42, 0.3);
-        }
-        
-        /* Contact Cards */
-        .contact-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        /* Form Styling */
-        .form-input {
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(183, 71, 42, 0.1);
-        }
-        
-        /* Resume Actions */
-        .resume-action {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-        
-        /* Status Indicators */
-        .status-available {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-        
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-    </style>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/Fraunces-450-640-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexSans-400-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexMono-400-normal.woff2" crossorigin>
+    <link rel="stylesheet" href="styles.css?v=20260701">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+    <a href="#contact-main" class="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] bg-white px-3 py-2 text-sm">Skip to content</a>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="font-display font-bold text-xl text-gray-800">
-                    <a href="index.html">Vasil Vassilev</a>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
-                    <a href="about.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Projects</a>
-                    <a href="contact.html" class="text-gray-900 font-semibold">Contact</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="site-nav" aria-label="Main">
+        <div class="wrap flex items-center justify-between h-16">
+            <a href="index.html" class="font-mono text-sm font-medium tracking-widest uppercase">V.&nbsp;Vassilev</a>
+            <div class="hidden sm:flex items-center gap-6">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="index.html#climbing" class="nav-link">Climbing</a>
+                <a href="contact.html" class="nav-link" aria-current="page">Contact</a>
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary !py-2 !px-4 text-xs" download>Resume</a>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Home</a>
-                <a href="about.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">About</a>
-                <a href="projects.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Projects</a>
-                <a href="contact.html" class="block px-3 py-2 text-gray-900 font-semibold">Contact</a>
+            <div class="sm:hidden flex items-center gap-4">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary !py-2 !px-3 text-xs" download>Resume</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h1 class="font-display text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
-                    Let's Connect
-                </h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Actively seeking software engineering roles (Salt Lake City or remote).
-                </p>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
-                    Salt Lake City, UT &bull; vvassilev515@gmail.com &bull; github.com/vsicle &bull; linkedin.com/in/vasil-vassilev
-                </p>
-            </div>
-            
-            <!-- Availability Status -->
-            <div class="flex justify-center mb-16 fade-in-up">
-                <div class="status-available text-white px-6 py-3 rounded-full flex items-center space-x-3">
-                    <div class="status-indicator bg-white"></div>
-                    <span class="font-semibold">Available for New Opportunities</span>
+    <main id="contact-main">
+        <!-- Header -->
+        <section class="pt-28 pb-14 sm:pt-36 sm:pb-16">
+            <div class="wrap">
+                <div class="reveal">
+                    <p class="eyebrow mb-5">Contact</p>
+                    <h1 class="font-display mb-6" style="font-weight: 560; font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.05; color: var(--ink);">Get in touch</h1>
+                    <p class="work-body mb-5" style="max-width: 52ch; font-size: 1.08rem;">
+                        Actively seeking software engineering roles &mdash; Salt Lake City or remote.
+                    </p>
+                    <p class="font-mono text-sm" style="color: var(--ink-soft); overflow-wrap: anywhere;">
+                        Salt Lake City, UT &middot; vvassilev515@gmail.com &middot; github.com/vsicle &middot; linkedin.com/in/vasil-vassilev
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Methods -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    Get In Touch
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Choose the method that works best for you. I'm responsive to all forms of communication 
-                    and excited to discuss potential collaborations.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                <!-- Email Contact -->
-                <div class="contact-card rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display text-xl font-semibold text-center mb-4 text-gray-800">Email</h3>
-                    <p class="text-gray-600 text-center mb-6">
-                        Copy my email address for detailed project discussions and professional inquiries.
-                    </p>
-                    <a href="mailto:vvassilev515@gmail.com" data-copy-email="vvassilev515@gmail.com" class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                        Copy Email
-                    </a>
-                    <div class="text-center mt-4">
-                        <span class="text-sm text-gray-500 font-mono">vvassilev515@gmail.com</span>
-                    </div>
-                </div>
-                
-                <!-- GitHub -->
-                <div class="contact-card rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                        <svg class="w-8 h-8 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-display text-xl font-semibold text-center mb-4 text-gray-800">View My Code</h3>
-                    <p class="text-gray-600 text-center mb-6">
-                        Explore my projects, contributions, and coding style on GitHub. See my development journey in action.
-                    </p>
-                    <a href="https://github.com/vsicle" target="_blank" rel="noreferrer" class="block w-full bg-gray-800 text-white text-center py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
-                        Visit GitHub
-                    </a>
-                    <div class="text-center mt-4">
-                        <span class="text-sm text-gray-500 font-mono">github.com/vsicle</span>
-                    </div>
-                </div>
+        <!-- Two-column: channels + form -->
+        <section class="pb-24 sm:pb-28">
+            <div class="wrap">
+                <div class="grid lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-12 lg:gap-16 items-start">
 
-                <!-- LinkedIn -->
-                <div class="contact-card rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                        <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 18.34V9.76H5.48V18.34H8.34ZM6.91 8.59A1.66 1.66 0 1 0 6.91 5.27A1.66 1.66 0 0 0 6.91 8.59ZM18.52 18.34V13.65C18.52 11.14 17.19 9.54 14.86 9.54C13.74 9.54 12.99 10.16 12.68 10.59V9.76H9.95C9.99 10.31 9.95 18.34 9.95 18.34H12.8V13.55C12.8 13.29 12.82 13.03 12.9 12.84C13.11 12.32 13.57 11.78 14.37 11.78C15.41 11.78 15.83 12.57 15.83 13.73V18.34H18.52Z"/>
-                        </svg>
+                    <!-- Direct channels -->
+                    <div class="reveal">
+                        <span class="eyebrow block mb-6">Direct channels</span>
+                        <ul class="flex flex-col gap-6">
+                            <li>
+                                <span class="field-label">Email</span>
+                                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                                    <a href="mailto:vvassilev515@gmail.com" class="text-link" style="overflow-wrap: anywhere;">vvassilev515@gmail.com</a>
+                                    <button type="button" class="text-link font-mono text-xs" data-copy-email="vvassilev515@gmail.com">Copy</button>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="field-label">GitHub</span>
+                                <a href="https://github.com/vsicle" class="text-link" target="_blank" rel="noreferrer">github.com/vsicle &nearr;</a>
+                            </li>
+                            <li>
+                                <span class="field-label">LinkedIn</span>
+                                <a href="https://www.linkedin.com/in/vasil-vassilev/" class="text-link" target="_blank" rel="noreferrer">linkedin.com/in/vasil-vassilev &nearr;</a>
+                            </li>
+                            <li>
+                                <span class="field-label">Resume</span>
+                                <a href="Vasil_Vassilev_Resume.pdf" class="text-link" download>Download resume (PDF)</a>
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="font-display text-xl font-semibold text-center mb-4 text-gray-800">Professional Profile</h3>
-                    <p class="text-gray-600 text-center mb-6">
-                        Connect with me on LinkedIn for experience details, recommendations, and career updates.
-                    </p>
-                    <a href="https://www.linkedin.com/in/vasil-vassilev/" target="_blank" rel="noreferrer" class="block w-full bg-blue-700 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
-                        Visit LinkedIn
-                    </a>
-                    <div class="text-center mt-4">
-                        <span class="text-sm text-gray-500 font-mono">linkedin.com/in/vasil-vassilev</span>
-                    </div>
-                </div>
-                
-                <!-- Resume Quick Access -->
-                <div class="contact-card rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zm0 0v6h6m-8 5v4m0 0l-3-3m3 3l3-3"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-display text-xl font-semibold text-center mb-4 text-gray-800">Resume PDF</h3>
-                    <p class="text-gray-600 text-center mb-6">
-                        Open the latest resume directly from this site for a quick review or save it for later.
-                    </p>
-                    <a href="Vasil_Vassilev_Resume.pdf" download data-download-resume class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Download Resume</a>
-                    <div class="text-center mt-4">
-                        <span class="text-sm text-gray-500">Updated file hosted locally</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Resume Management -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    Resume & Documentation
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Access my professional resume and documentation. Share with colleagues or download for your records.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Email Resume -->
-                <div class="resume-action rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-800">Share Resume by Email</h3>
-                    <p class="text-gray-600 mb-6">
-                        Enter an email address and the site will try to send a resume link there.
-                        If outbound delivery is restricted, the resume opens directly and I still get notified.
-                    </p>
-                    <form id="resumeRequestForm" class="space-y-4">
-                        <div>
-                            <label for="resumeEmail" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                            <input
-                                type="email"
-                                id="resumeEmail"
-                                name="email"
-                                required
-                                placeholder="name@company.com"
-                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
-                            >
-                        </div>
-                        <button id="emailResumeBtn" type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors hover-glow">
-                            Email Resume
-                        </button>
-                        <p class="text-sm text-gray-500">
-                            Resume delivery is handled securely by the site backend.
+                    <!-- Form -->
+                    <div class="reveal">
+                        <span class="eyebrow block mb-6">Send a message</span>
+                        <form id="contactForm" novalidate>
+                            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+                                <div>
+                                    <label for="firstName" class="field-label">First name *</label>
+                                    <input class="field-input" type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                                </div>
+                                <div>
+                                    <label for="lastName" class="field-label">Last name *</label>
+                                    <input class="field-input" type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="email" class="field-label">Email *</label>
+                                <input class="field-input" type="email" id="email" name="email" autocomplete="email" required>
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="company" class="field-label">Company (optional)</label>
+                                <input class="field-input" type="text" id="company" name="company" autocomplete="organization">
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="subject" class="field-label">Subject *</label>
+                                <select class="field-input" id="subject" name="subject" required>
+                                    <option value="job-opportunity">Job Opportunity</option>
+                                    <option value="freelance-project">Freelance Project</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="general-inquiry">General Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="message" class="field-label">Message *</label>
+                                <textarea class="field-input" id="message" name="message" rows="6" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Send message</button>
+
+                            <p class="mt-5 font-mono text-sm" role="status" aria-live="polite" style="color: var(--ink-soft); min-height: 1.2em;"></p>
+                        </form>
+
+                        <p class="mt-4 text-sm" style="color: var(--muted);">
+                            Your details are used only to reply. See the
+                            <a href="privacy-policy.html" class="text-link">privacy policy</a>.
                         </p>
-                    </form>
-                </div>
-                
-                <!-- Download Resume -->
-                <div class="resume-action rounded-2xl p-8 hover-lift fade-in-up">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
                     </div>
-                    <h3 class="font-display text-2xl font-semibold mb-4 text-gray-800">Download Resume</h3>
-                    <p class="text-gray-600 mb-6">
-                        Download my resume as a PDF for your records or offline viewing. 
-                        Updated regularly with latest skills and experience.
-                    </p>
-                    <a href="Vasil_Vassilev_Resume.pdf" download data-download-resume class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors hover-glow">
-                        Download PDF
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Form -->
-    <section class="py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    Send Me a Message
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Have a specific question or project in mind? Fill out the form below and I'll get back to you within 24 hours.
-                </p>
-            </div>
-            
-            <div class="bg-white rounded-2xl shadow-2xl p-8 lg:p-12 fade-in-up">
-                <form id="contactForm" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required 
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                        </div>
-                        <div>
-                            <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required 
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
-                        <input type="email" id="email" name="email" required 
-                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                    </div>
-                    
-                    <div>
-                        <label for="company" class="block text-sm font-semibold text-gray-700 mb-2">Company/Organization</label>
-                        <input type="text" id="company" name="company" 
-                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                    </div>
-                    
-                    <div>
-                        <label for="subject" class="block text-sm font-semibold text-gray-700 mb-2">Subject *</label>
-                        <select id="subject" name="subject" required 
-                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                            <option value="">Select a topic...</option>
-                            <option value="job-opportunity">Job Opportunity</option>
-                            <option value="freelance-project">Freelance Project</option>
-                            <option value="collaboration">Collaboration</option>
-                            <option value="general-inquiry">General Inquiry</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                        <textarea id="message" name="message" rows="6" required 
-                                  placeholder="Tell me about your project, opportunity, or question..."
-                                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none resize-none"></textarea>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <input type="checkbox" id="privacy" name="privacy" required 
-                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="privacy" class="ml-3 text-sm text-gray-600">
-                            I agree to the <a href="privacy-policy.html" class="text-blue-600 hover:text-blue-800">privacy policy</a> and understand that my information will be used to respond to this inquiry.
-                        </label>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" id="submitBtn" 
-                                class="bg-gray-800 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-700 transition-colors hover-glow">
-                            Send Message
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Additional Information -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    What I'm Looking For
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    I'm seeking opportunities that align with my skills, interests, and career goals
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-6 shadow-lg hover-lift fade-in-up">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-3">Software Development</h3>
-                    <p class="text-gray-600 text-sm">Full-stack development, system architecture, and building scalable applications with modern technologies.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg hover-lift fade-in-up">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-3">Cybersecurity</h3>
-                    <p class="text-gray-600 text-sm">Security research, vulnerability analysis, and implementing secure coding practices in software development.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg hover-lift fade-in-up">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-3">Innovation</h3>
-                    <p class="text-gray-600 text-sm">Working with cutting-edge technologies and solving complex problems that push technical boundaries.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="font-display text-2xl font-bold mb-4">Vasil Vassilev</div>
-                <p class="text-gray-400 mb-6">Software Developer & Professional Climber</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://github.com/vsicle" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/vasil-vassilev/" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 18.34V9.76H5.48V18.34H8.34ZM6.91 8.59A1.66 1.66 0 1 0 6.91 5.27A1.66 1.66 0 0 0 6.91 8.59ZM18.52 18.34V13.65C18.52 11.14 17.19 9.54 14.86 9.54C13.74 9.54 12.99 10.16 12.68 10.59V9.76H9.95C9.99 10.31 9.95 18.34 9.95 18.34H12.8V13.55C12.8 13.29 12.82 13.03 12.9 12.84C13.11 12.32 13.57 11.78 14.37 11.78C15.41 11.78 15.83 12.57 15.83 13.73V18.34H18.52Z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:vvassilev515@gmail.com" data-copy-email="vvassilev515@gmail.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Copy email address">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                    </a>
-                </div>
-                <div class="border-t border-gray-800 pt-8">
-                    <p class="text-gray-400 text-sm">
-                        &copy; 2026 Vasil Vassilev. All rights reserved.
+    <footer class="site-footer py-16">
+        <div class="wrap">
+            <div class="grid md:grid-cols-2 gap-10 items-start mb-12">
+                <div>
+                    <h2 class="font-display text-3xl mb-3" style="font-weight: 560;">Vasil Vassilev</h2>
+                    <p class="font-mono text-sm" style="color: #b9b7ab;">
+                        Actively seeking software engineering roles &mdash; Salt Lake City or remote.
                     </p>
                 </div>
+                <div class="flex flex-col gap-3 md:items-end">
+                    <a href="mailto:vvassilev515@gmail.com" class="footer-link">vvassilev515@gmail.com</a>
+                    <a href="https://github.com/vsicle" class="footer-link" target="_blank" rel="noreferrer">github.com/vsicle</a>
+                    <a href="https://www.linkedin.com/in/vasil-vassilev/" class="footer-link" target="_blank" rel="noreferrer">linkedin.com/in/vasil-vassilev</a>
+                    <a href="Vasil_Vassilev_Resume.pdf" class="footer-link" download>Download resume (PDF)</a>
+                    <a href="contact.html" class="footer-link">Contact form</a>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-8" style="border-top: 1px solid rgba(232, 230, 221, 0.15);">
+                <span class="font-mono text-xs" style="color: #a5a396;">Salt Lake City, UT</span>
+                <a href="privacy-policy.html" class="footer-link text-xs">Privacy policy</a>
             </div>
         </div>
     </footer>
 
-    <script src="main.js?v=20260521"></script>
-    <script>
-        // Contact page specific functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.classList.add('js-animations');
-
-            // Initialize mobile menu
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-            
-            // Scroll animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-up').forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
+    <script src="main.js?v=20260701" defer></script>
 </body>
 </html>

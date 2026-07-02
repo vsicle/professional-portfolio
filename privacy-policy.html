@@ -3,72 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Vasil Vassilev</title>
+    <title>Privacy Policy — Vasil Vassilev</title>
     <meta name="description" content="Privacy policy for the Vasil Vassilev portfolio contact form and resume site.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #1a1a1a;
-            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-        }
-
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .nav-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-    </style>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/Fraunces-450-640-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexSans-400-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexMono-400-normal.woff2" crossorigin>
+    <link rel="stylesheet" href="styles.css?v=20260701">
 </head>
 <body>
-    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-200">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="font-display font-bold text-xl text-gray-800">Vasil Vassilev</a>
-                <div class="flex items-center gap-6 text-sm font-medium">
-                    <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact</a>
-                    <a href="Vasil_Vassilev_Resume.pdf" download class="text-gray-600 hover:text-gray-900">Resume</a>
-                </div>
+    <!-- Navigation -->
+    <nav class="site-nav" aria-label="Main">
+        <div class="wrap flex items-center justify-between h-16">
+            <a href="index.html" class="font-mono text-sm font-medium tracking-widest uppercase">V.&nbsp;Vassilev</a>
+            <div class="flex items-center gap-6">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary !py-2 !px-4 text-xs" download>Resume</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-28 pb-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                <div class="bg-gray-900 text-white px-8 py-10">
-                    <p class="text-sm uppercase tracking-[0.3em] text-gray-300 mb-3">Privacy Policy</p>
-                    <h1 class="font-display text-4xl font-bold mb-4">How contact details are handled</h1>
-                    <p class="text-lg text-gray-300 max-w-2xl">
-                        This portfolio keeps the privacy policy simple: contact details are used only to respond to professional inquiries and resume requests.
-                    </p>
-                </div>
-                <div class="px-8 py-10 space-y-8 text-gray-700 leading-7">
-                    <section>
-                        <h2 class="font-display text-2xl font-semibold text-gray-900 mb-3">What information is collected</h2>
-                        <p>The contact form asks for your name, email address, optional company, subject, and message so your inquiry has enough context to be answered clearly.</p>
-                    </section>
-                    <section>
-                        <h2 class="font-display text-2xl font-semibold text-gray-900 mb-3">How it is used</h2>
-                        <p>Submitting the form sends the inquiry to Vasil Vassilev through the site backend and Resend's email API. The site does not store contact form submissions in a database.</p>
-                    </section>
-                    <section>
-                        <h2 class="font-display text-2xl font-semibold text-gray-900 mb-3">Resume downloads</h2>
-                        <p>The resume link serves a PDF file directly from this website. If a visitor asks the site to email a resume link, the provided email address is used only to deliver that resume link and notify Vasil Vassilev of the request.</p>
-                    </section>
-                    <section>
-                        <h2 class="font-display text-2xl font-semibold text-gray-900 mb-3">Questions</h2>
-                        <p>If you have a privacy-related question, use the contact page or copy this email address: <a href="mailto:vvassilev515@gmail.com" data-copy-email="vvassilev515@gmail.com" class="text-blue-600 hover:text-blue-800">vvassilev515@gmail.com</a>.</p>
-                    </section>
-                </div>
+    <main class="py-20 sm:py-28">
+        <div class="wrap" style="max-width: 44rem;">
+            <div class="section-head mb-10">
+                <span class="eyebrow">Privacy policy</span>
+                <h1 class="section-title">How contact details are handled</h1>
             </div>
+
+            <p class="mb-10" style="color: var(--ink-soft); font-size: 1.08rem;">
+                This portfolio keeps the privacy policy simple: contact details are used only to
+                respond to professional inquiries.
+            </p>
+
+            <section class="mb-8">
+                <h2 class="font-display text-2xl mb-3" style="font-weight: 560;">What information is collected</h2>
+                <p style="color: var(--ink-soft);">
+                    The contact form asks for your name, email address, optional company, subject, and
+                    message so your inquiry has enough context to be answered clearly.
+                </p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="font-display text-2xl mb-3" style="font-weight: 560;">How it is used</h2>
+                <p style="color: var(--ink-soft);">
+                    Submitting the form sends the inquiry to Vasil Vassilev through the site backend and
+                    Resend's email API. The site does not store contact form submissions in a database.
+                </p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="font-display text-2xl mb-3" style="font-weight: 560;">Resume downloads</h2>
+                <p style="color: var(--ink-soft);">
+                    The resume link serves a PDF file directly from this website.
+                </p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="font-display text-2xl mb-3" style="font-weight: 560;">Questions</h2>
+                <p style="color: var(--ink-soft);">
+                    If you have a privacy-related question, use the
+                    <a href="contact.html" class="text-link">contact page</a> or email
+                    <a href="mailto:vvassilev515@gmail.com" data-copy-email="vvassilev515@gmail.com" class="text-link">vvassilev515@gmail.com</a>.
+                </p>
+            </section>
+
+            <p class="pt-6" style="border-top: 1px solid var(--line);">
+                <a href="index.html" class="text-link">&larr; Back to vasilvassilev.cc</a>
+            </p>
         </div>
     </main>
-    <script src="main.js?v=20260521"></script>
+
+    <script src="main.js?v=20260701" defer></script>
 </body>
 </html>

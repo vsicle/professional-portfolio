@@ -1,4 +1,11 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/about.html", "destination": "/", "permanent": true },
+    { "source": "/projects.html", "destination": "/#work", "permanent": true },
+    { "source": "/about", "destination": "/", "permanent": true },
+    { "source": "/projects", "destination": "/#work", "permanent": true },
+    { "source": "/Vasil Vassilev Resume.pdf", "destination": "/Vasil_Vassilev_Resume.pdf", "permanent": true }
+  ]
 }

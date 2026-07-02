@@ -3,514 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vasil Vassilev - Software Developer & Professional Climber</title>
-    <meta name="description" content="Vasil Vassilev — Software Engineer, Salt Lake City. B.S. in Software Development, University of Utah (May 2026). Industry-sponsored capstone with L3Harris Technologies, security research, and former World Cup climber. Actively seeking software engineering roles.">
+    <title>Vasil Vassilev — Software Engineer, Salt Lake City</title>
+    <meta name="description" content="Vasil Vassilev — software engineer in Salt Lake City. B.S. in Software Development, University of Utah (May 2026). Rust/Python systems work, five upstream StormLib security fixes, founder of two businesses, former World Cup climber. Actively seeking software engineering roles.">
+    <link rel="canonical" href="https://www.vasilvassilev.cc/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.vasilvassilev.cc/">
+    <meta property="og:title" content="Vasil Vassilev — Software Engineer, Salt Lake City">
+    <meta property="og:description" content="Systems and security-flavored engineer: Rust, fuzzing research with five upstream fixes, two founded businesses. Former 5x World Cup climber. Actively seeking software engineering roles.">
+    <meta property="og:image" content="https://www.vasilvassilev.cc/resources/climbing-3.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vasil Vassilev — Software Engineer, Salt Lake City">
+    <meta name="twitter:description" content="Systems and security-flavored engineer: Rust, fuzzing research with five upstream fixes, two founded businesses. Former 5x World Cup climber.">
+    <meta name="twitter:image" content="https://www.vasilvassilev.cc/resources/climbing-3.jpg">
+
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Core Libraries -->
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #2C3E50;
-            --secondary: #B7472A;
-            --accent: #7F8C8D;
-            --background: #FFFFFF;
-            --text: #1A1A1A;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        /* Prefer native smooth-scroll for anchor navigation */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        /* Hero Background Animation */
-        .hero-bg {
-            background: linear-gradient(135deg, #2C3E50 0%, #34495E 50%, #2C3E50 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* decorative pattern sits in a pseudo-element. We animate its background-position
-           and apply the parallax transform only to the pseudo-element via a CSS variable
-           to avoid moving the whole section (which causes layout overlap and jank). */
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            background-repeat: repeat;
-            background-position: 0 0;
-            animation: gridMove 20s linear infinite;
-            will-change: transform, background-position;
-            /* move only the decorative layer using a CSS variable so the section flow is unchanged */
-            transform: translateY(var(--parallax, 0px));
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.12;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 10px 10px; }
-        }
-
-        /* ensure content inside hero sits above the pseudo-element */
-        .hero-bg .max-w-7xl {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Navigation */
-        .nav-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        /* Animations */
-        .fade-in-up {
-            opacity: 1;
-            transform: translateY(0);
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-        }
-
-        .fade-in-up.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Hover Effects */
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .hover-glow {
-            transition: all 0.3s ease;
-        }
-        
-        .hover-glow:hover {
-            box-shadow: 0 0 20px rgba(183, 71, 42, 0.3);
-        }
-        
-        /* Skills Chart */
-        #skillsChart {
-            height: 400px;
-        }
-
-        /* Prevent heading overlap with the chart - add extra top spacing for the skills section
-           and ensure the chart area has internal padding so the chart title/labels don't collide
-           with the document H2 on smaller viewports. */
-        .skills-section {
-            padding-top: 2.5rem; /* extra breathing room above the chart */
-        }
-
-        #skillsChart {
-            padding-top: 1.2rem;
-            box-sizing: border-box;
-        }
-        
-        /* Project Cards */
-        .project-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        /* Typewriter Cursor */
-        .typed-cursor {
-            color: var(--secondary);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content {
-                padding: 2rem 1rem;
-            }
-            
-            #skillsChart {
-                height: 300px;
-            }
-        }
-    </style>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/Fraunces-450-640-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexSans-400-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/IBMPlexMono-400-normal.woff2" crossorigin>
+    <link rel="stylesheet" href="styles.css?v=20260701">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+    <a href="#work" class="sr-only focus:not-sr-only fixed top-2 left-2 z-[60] bg-white px-3 py-2 text-sm">Skip to content</a>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="font-display font-bold text-xl text-gray-800">
-                    Vasil Vassilev
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
-                    <a href="about.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Projects</a>
-                    <a href="contact.html" class="text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="site-nav" aria-label="Main">
+        <div class="wrap flex items-center justify-between h-16">
+            <a href="#top" class="font-mono text-sm font-medium tracking-widest uppercase">V.&nbsp;Vassilev</a>
+            <div class="hidden sm:flex items-center gap-6">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#climbing" class="nav-link">Climbing</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary !py-2 !px-4 text-xs" download>Resume</a>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Home</a>
-                <a href="about.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">About</a>
-                <a href="projects.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Projects</a>
-                <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:text-gray-900">Contact</a>
+            <div class="sm:hidden flex items-center gap-4">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary !py-2 !px-3 text-xs" download>Resume</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg min-h-screen flex items-center relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Hero Content -->
-                <div class="hero-content text-white">
-                    <div class="mb-6">
-                        <h1 class="font-display text-5xl lg:text-7xl font-bold mb-4">
-                            <span id="typed-name"></span>
-                        </h1>
-                        <p class="text-xl lg:text-2xl mb-6 opacity-90">
-                            Software Developer & Professional Climber
-                        </p>
-                        <p class="text-lg mb-4 opacity-80 max-w-2xl">
-                            B.S. in Software Development, University of Utah, May 2026, 3.8 GPA.
-                            Completed an industry-sponsored capstone with L3Harris Technologies,
-                            co-discovered five memory-safety bugs in StormLib, and built two businesses.
-                        </p>
-                        <p class="text-lg mb-8 font-semibold max-w-2xl">
-                            Actively seeking software engineering roles (Salt Lake City or remote).
-                        </p>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <a href="contact.html" class="bg-white text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center hover-glow">
-                            Get In Touch
-                        </a>
-                        <a href="projects.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors text-center">
-                            View Projects
-                        </a>
-                    </div>
-                    
-                    <div class="flex items-center space-x-6 text-sm opacity-75">
-                        <span>Salt Lake City, UT</span>
-                        <span>•</span>
-                        <span class="font-mono">GPA: 3.8</span>
-                        <span>•</span>
-                        <span>University of Utah</span>
-                        <span>•</span>
-                        <span>L3Harris Capstone</span>
-                    </div>
-                </div>
-                
-                <!-- Hero Image -->
-                <div class="relative">
-                    <div class="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="resources/hero-portfolio.jpg" alt="Professional workspace" 
-                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-gray-800">3.8</div>
-                            <div class="text-sm text-gray-600">GPA</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Hero -->
+    <header id="top" class="hero">
+        <div id="terrain" class="hero-scene" aria-hidden="true"></div>
+        <div class="hero-scrim" aria-hidden="true"></div>
 
-    <!-- Skills Section -->
-    <section class="py-20 bg-gray-50 skills-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    Technical Expertise
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    A diverse skill set spanning software development, cybersecurity, and full-stack web development
-                </p>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Skills Chart -->
-                <div class="fade-in-up">
-                    <div id="skillsChart" class="bg-white rounded-2xl shadow-lg p-6"></div>
-                </div>
-                
-                <!-- Skills List -->
-                <div class="fade-in-up">
-                    <div class="space-y-6">
-                        <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-                            <h3 class="font-display text-xl font-semibold mb-3 text-gray-800">Programming Languages</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Python</span>
-                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Java</span>
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">C++</span>
-                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Rust</span>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-                            <h3 class="font-display text-xl font-semibold mb-3 text-gray-800">Web Development</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">React</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Django</span>
-                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">fastAPI</span>
-                                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">AWS</span>
-                                <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">TailwindCSS</span>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-                            <h3 class="font-display text-xl font-semibold mb-3 text-gray-800">Security & Tools</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">AFL++</span>
-                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Wireshark</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Linux</span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Git</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                    Featured Projects
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Highlighting key projects that demonstrate technical expertise and problem-solving abilities
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- L3Harris Distributed Testing -->
-                <div class="project-card rounded-2xl p-6 hover-lift fade-in-up">
-                    <div class="mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-display text-xl font-semibold mb-2 text-gray-800">Distributed Satellite Test Platform</h3>
-                        <p class="text-gray-600 mb-4">Architected a multi-chassis distributed testing platform at L3Harris using Rust and Python, with RESTful control APIs and observability dashboards for mission-critical satellite systems.</p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">Rust</span>
-                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Python</span>
-                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">REST APIs</span>
-                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">Grafana</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs font-medium">TimescaleDB</span>
-                    </div>
-                    <a href="projects.html" class="text-blue-600 hover:text-blue-800 font-medium">Learn More &rarr;</a>
-                </div>
-                
-                <!-- AI Voice Receptionist -->
-                <div class="project-card rounded-2xl p-6 hover-lift fade-in-up">
-                    <div class="mb-4">
-                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59a1 1 0 01-.11.98L7 16a2 2 0 002 2h9m0 0a2 2 0 100 4 2 2 0 000-4zm-9 0a2 2 0 100 4 2 2 0 000-4m1-13h10l-1.68 8.39a2 2 0 01-1.96 1.61H9.72a2 2 0 01-1.79-1.11L5 4H3"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-display text-xl font-semibold mb-2 text-gray-800">AI Voice Receptionist Platform</h3>
-                        <p class="text-gray-600 mb-4">Built an AI-powered phone receptionist product for law firms, integrating telephony, automation workflows, and lead-routing systems for 24/7 intake and booking.</p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Retell AI</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">Twilio</span>
-                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">n8n</span>
-                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">Webhooks</span>
-                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-medium">CRM</span>
-                    </div>
-                    <a href="projects.html" class="text-green-600 hover:text-green-800 font-medium">Learn More &rarr;</a>
-                </div>
-                
-                <!-- Desktop Text Editor -->
-                <div class="project-card rounded-2xl p-6 hover-lift fade-in-up">
-                    <div class="mb-4">
-                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-3">
-                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6M9 8h6m-9 12h12a2 2 0 002-2V6a2 2 0 00-2-2H8l-4 4v10a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-display text-xl font-semibold mb-2 text-gray-800">Desktop Text Editor with Syntax Engine</h3>
-                        <p class="text-gray-600 mb-4">Designed a desktop editor from scratch with MVC architecture, custom tokenizer-based syntax highlighting for six languages, and a 600+ test suite (pytest).</p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-medium">Python</span>
-                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">PyQt</span>
-                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">MVC</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">TDD</span>
-                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Testing</span>
-                    </div>
-                    <a href="projects.html" class="text-red-600 hover:text-red-800 font-medium">Learn More &rarr;</a>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12 fade-in-up">
-                <a href="projects.html" class="bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors hover-glow">
-                    View All Projects
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Climbing Achievement Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="fade-in-up">
-                    <h2 class="font-display text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-                        From Climbing Walls to Coding Solutions
-                    </h2>
-                    <p class="text-xl text-gray-600 mb-6">
-                        Professional sport climbing taught me discipline, problem-solving, and the importance of precision. 
-                        These same principles guide my approach to software development.
-                    </p>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                            <span class="text-gray-700">Analytical thinking and route planning</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span class="text-gray-700">Persistence in solving complex problems</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-                            <span class="text-gray-700">Precision and attention to detail</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                            <span class="text-gray-700">Continuous learning and improvement</span>
-                        </div>
-                    </div>
-                    <a href="about.html" class="bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
-                        Learn More About My Journey
-                    </a>
-                </div>
-                
-                <div class="fade-in-up">
-                    <div class="relative">
-                        <img src="resources/climbing-3.jpg" alt="Professional climbing" 
-                             class="w-full h-96 object-cover rounded-2xl shadow-lg">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <h3 class="font-display text-2xl font-bold mb-2">Professional Sport Climber</h3>
-                            <p class="opacity-90">Discipline • Precision • Problem Solving</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-20 bg-gray-800 text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6">
-                Ready to Build Something Amazing Together?
-            </h2>
-            <p class="text-xl mb-8 opacity-90">
-                I'm currently seeking software development opportunities where I can contribute my technical skills, 
-                problem-solving abilities, and the discipline learned from professional climbing.
+        <div class="wrap py-28">
+            <p class="eyebrow mb-5">Salt Lake City, UT &nbsp;&middot;&nbsp; 40.7608&deg; N, 111.8910&deg; W</p>
+            <h1 class="hero-title mb-6">Vasil Vassilev</h1>
+            <p class="hero-lede mb-4">
+                Software engineer. Rust and Python systems work on an industry-sponsored
+                L3Harris capstone, five memory-safety bugs found and fixed upstream in StormLib,
+                and two businesses built from zero. Before that: five World Cups as a competition climber.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="contact.html" class="bg-white text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors hover-glow">
-                    Get In Touch
-                </a>
-                <a href="Vasil_Vassilev_Resume.pdf" download data-download-resume class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
-                    Download Resume
-                </a>
+            <p class="font-mono text-sm mb-7" style="color: var(--ink-soft);">
+                B.S. in Software Development &middot; University of Utah &middot; May 2026 &middot; 3.8 GPA
+            </p>
+
+            <p class="mb-8">
+                <span class="status-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    Actively seeking software engineering roles &mdash; Salt Lake City or remote
+                </span>
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a href="Vasil_Vassilev_Resume.pdf" class="btn btn-primary" download>View resume</a>
+                <a href="mailto:vvassilev515@gmail.com" class="btn btn-secondary">Email me</a>
             </div>
         </div>
-    </section>
+    </header>
+
+    <main>
+        <!-- Selected work -->
+        <section id="work" class="py-20 sm:py-28">
+            <div class="wrap">
+                <div class="section-head mb-12 reveal">
+                    <span class="eyebrow">01</span>
+                    <h2 class="section-title">Selected work</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- StormLib -->
+                    <article class="work-card reveal">
+                        <span class="work-index">01 / SECURITY RESEARCH</span>
+                        <h3 class="work-title">StormLib vulnerability research</h3>
+                        <p class="work-body">
+                            Co-discovered five memory-safety bugs &mdash; buffer overflows and memory
+                            corruption &mdash; in StormLib, the C++ library for Blizzard MPQ archives.
+                            Fuzzed with AFL++ and AddressSanitizer using OGHarn-generated harnesses and
+                            triaged each crash to root cause in GDB. All five were reported upstream and
+                            fixed by the maintainer.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">C++</span>
+                            <span class="tag">AFL++</span>
+                            <span class="tag">AddressSanitizer</span>
+                            <span class="tag">OGHarn</span>
+                            <span class="tag">GDB</span>
+                        </div>
+                        <div class="work-links">
+                            <a href="https://github.com/vsicle/stormlib-fuzzing-results" class="text-link" target="_blank" rel="noreferrer">Read the write-up &nearr;</a>
+                            <span class="no-link">Upstream:</span>
+                            <a href="https://github.com/ladislav-zezula/StormLib/issues/383" class="text-link" target="_blank" rel="noreferrer">#383</a>
+                            <a href="https://github.com/ladislav-zezula/StormLib/issues/384" class="text-link" target="_blank" rel="noreferrer">#384</a>
+                            <a href="https://github.com/ladislav-zezula/StormLib/issues/385" class="text-link" target="_blank" rel="noreferrer">#385</a>
+                            <a href="https://github.com/ladislav-zezula/StormLib/issues/386" class="text-link" target="_blank" rel="noreferrer">#386</a>
+                            <a href="https://github.com/ladislav-zezula/StormLib/issues/387" class="text-link" target="_blank" rel="noreferrer">#387</a>
+                        </div>
+                    </article>
+
+                    <!-- L3Harris capstone -->
+                    <article class="work-card reveal">
+                        <span class="work-index">02 / SYSTEMS</span>
+                        <h3 class="work-title">L3Harris industry-sponsored capstone</h3>
+                        <p class="work-body">
+                            Five-engineer capstone sponsored by L3Harris Technologies: extended an
+                            open-source network-testing platform (Rust, Python) for military satellite
+                            communications, adding multi-chassis coordination on top of the TRex traffic
+                            generator. Owned GPS time-synchronization validation, the scripting API for
+                            engineer automation, and real-time dashboards on TimescaleDB and Grafana.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Rust</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">TimescaleDB</span>
+                            <span class="tag">Grafana</span>
+                            <span class="tag">GitLab CI/CD</span>
+                        </div>
+                        <div class="work-links">
+                            <span class="no-link">Sponsor infrastructure &mdash; no public repo</span>
+                        </div>
+                    </article>
+
+                    <!-- ringnest.cloud -->
+                    <article class="work-card reveal">
+                        <span class="work-index">03 / FOUNDER</span>
+                        <h3 class="work-title">ringnest.cloud</h3>
+                        <p class="work-body">
+                            AI voice receptionist for dental and legal practices: 24/7 call answering,
+                            lead qualification, and appointment booking built on Retell AI and Twilio,
+                            with n8n automation routing calls into CRM follow-up. Confidence-based
+                            escalation hands low-confidence calls to a human instead of letting the
+                            model guess.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Retell AI</span>
+                            <span class="tag">Twilio</span>
+                            <span class="tag">n8n</span>
+                        </div>
+                        <div class="work-links">
+                            <a href="https://ringnest.cloud" class="text-link" target="_blank" rel="noreferrer">ringnest.cloud &nearr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Text editor -->
+                    <article class="work-card reveal">
+                        <span class="work-index">04 / TOOLING</span>
+                        <h3 class="work-title">Custom text editor</h3>
+                        <p class="work-body">
+                            Cross-platform desktop editor built from scratch in Python and PyQt6:
+                            tokenizer-based syntax highlighting for six languages, file-tree navigation
+                            with auto-refresh, and a memory-optimized undo/redo system. A 600+ test
+                            pytest suite gated AI-assisted development across the three-week build.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Python</span>
+                            <span class="tag">PyQt6</span>
+                            <span class="tag">pytest</span>
+                            <span class="tag">TDD</span>
+                        </div>
+                        <div class="work-links">
+                            <span class="no-link">Private repo</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Climbing -->
+        <section id="climbing" class="py-20 sm:py-28" style="background: var(--paper-2);">
+            <div class="wrap">
+                <div class="section-head mb-12 reveal">
+                    <span class="eyebrow">02</span>
+                    <h2 class="section-title">Before engineering: World Cups</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-10 items-start">
+                    <div class="reveal">
+                        <p class="work-body mb-6" style="font-size: 1.08rem;">
+                            Competition climbing is months of structured preparation for a few minutes
+                            of execution, in public, with no second attempt. That is the working style
+                            this site's projects came out of.
+                        </p>
+                        <div>
+                            <div class="fact-line">
+                                <span class="mark">&#9650;</span>
+                                <span>5x World Cup competitor for Bulgaria, across multiple disciplines.</span>
+                            </div>
+                            <div class="fact-line">
+                                <span class="mark">&#9650;</span>
+                                <span>Head coach of the University of Utah climbing team (2023) &mdash; led the team to a #1 national ranking.</span>
+                            </div>
+                            <div class="fact-line">
+                                <span class="mark">&#9650;</span>
+                                <span>3x national champion in 1:8-scale RC racing before that. Competing is a habit.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 reveal">
+                        <figure class="climb-figure">
+                            <img src="resources/climbing-3.jpg" alt="Vasil Vassilev competing for Bulgaria at a World Cup lead climbing event, mountains behind the wall" loading="lazy" width="1100" height="1100">
+                            <figcaption>World Cup, lead &mdash; Bulgaria #29</figcaption>
+                        </figure>
+                        <figure class="climb-figure">
+                            <img src="resources/climbing-1.jpg" alt="Vasil Vassilev leading a traditional climbing route on a granite face" loading="lazy" width="1400" height="677">
+                            <figcaption>Granite, on the sharp end</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="font-display text-2xl font-bold mb-4">Vasil Vassilev</div>
-                <p class="text-gray-400 mb-6">Software Developer & Professional Climber</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://github.com/vsicle" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/vasil-vassilev/" target="_blank" rel="noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 18.34V9.76H5.48V18.34H8.34ZM6.91 8.59A1.66 1.66 0 1 0 6.91 5.27A1.66 1.66 0 0 0 6.91 8.59ZM18.52 18.34V13.65C18.52 11.14 17.19 9.54 14.86 9.54C13.74 9.54 12.99 10.16 12.68 10.59V9.76H9.95C9.99 10.31 9.95 18.34 9.95 18.34H12.8V13.55C12.8 13.29 12.82 13.03 12.9 12.84C13.11 12.32 13.57 11.78 14.37 11.78C15.41 11.78 15.83 12.57 15.83 13.73V18.34H18.52Z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:vvassilev515@gmail.com" data-copy-email="vvassilev515@gmail.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Copy email address">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                    </a>
-                </div>
-                <div class="border-t border-gray-800 pt-8">
-                    <p class="text-gray-400 text-sm">
-                        &copy; 2026 Vasil Vassilev. All rights reserved.
+    <footer class="site-footer py-16">
+        <div class="wrap">
+            <div class="grid md:grid-cols-2 gap-10 items-start mb-12">
+                <div>
+                    <h2 class="font-display text-3xl mb-3" style="font-weight: 560;">Vasil Vassilev</h2>
+                    <p class="font-mono text-sm" style="color: #b9b7ab;">
+                        Actively seeking software engineering roles &mdash; Salt Lake City or remote.
                     </p>
                 </div>
+                <div class="flex flex-col gap-3 md:items-end">
+                    <a href="mailto:vvassilev515@gmail.com" class="footer-link">vvassilev515@gmail.com</a>
+                    <a href="https://github.com/vsicle" class="footer-link" target="_blank" rel="noreferrer">github.com/vsicle</a>
+                    <a href="https://www.linkedin.com/in/vasil-vassilev/" class="footer-link" target="_blank" rel="noreferrer">linkedin.com/in/vasil-vassilev</a>
+                    <a href="Vasil_Vassilev_Resume.pdf" class="footer-link" download>Download resume (PDF)</a>
+                    <a href="contact.html" class="footer-link">Contact form</a>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-8" style="border-top: 1px solid rgba(232, 230, 221, 0.15);">
+                <span class="font-mono text-xs" style="color: #a5a396;">Salt Lake City, UT</span>
+                <a href="privacy-policy.html" class="footer-link text-xs">Privacy policy</a>
             </div>
         </div>
     </footer>
 
-    <script src="main.js?v=20260521"></script>
+    <script src="main.js?v=20260701" defer></script>
+
+    <!-- Three.js terrain: lazy, optional, honors prefers-reduced-motion -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.min.js"
+        }
+    }
+    </script>
+    <script>
+    (function () {
+        var host = document.getElementById('terrain');
+        if (!host) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var supportsWebGL = (function () {
+            try {
+                var c = document.createElement('canvas');
+                return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+            } catch (e) {
+                return false;
+            }
+        })();
+        if (!supportsWebGL) return;
+
+        function start() {
+            import('./js/terrain.js?v=20260701')
+                .then(function (mod) { mod.mountTerrain(host); })
+                .catch(function () { /* fallback image stays */ });
+        }
+
+        function whenIdle() {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(start, { timeout: 3000 });
+            } else {
+                setTimeout(start, 500);
+            }
+        }
+
+        if (document.readyState === 'complete') {
+            whenIdle();
+        } else {
+            window.addEventListener('load', whenIdle, { once: true });
+        }
+    })();
+    </script>
 </body>
 </html>
