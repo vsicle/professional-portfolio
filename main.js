@@ -29,6 +29,57 @@
         els.forEach(function (el) { observer.observe(el); });
     })();
 
+    // Project rows: hover previews on pointer devices, click pins open.
+    (function initProjectRows() {
+        var rows = document.querySelectorAll('.project-row');
+        if (!rows.length) return;
+
+        var hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        rows.forEach(function (row) {
+            var head = row.querySelector('.project-head');
+            if (!head) return;
+
+            function setOpen(open) {
+                row.classList.toggle('is-open', open);
+                head.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            head.addEventListener('click', function () {
+                row.dataset.pinned = row.dataset.pinned === 'true' ? 'false' : 'true';
+                setOpen(row.dataset.pinned === 'true');
+            });
+
+            if (hoverable) {
+                row.addEventListener('mouseenter', function () { setOpen(true); });
+                row.addEventListener('mouseleave', function () {
+                    if (row.dataset.pinned !== 'true') setOpen(false);
+                });
+            }
+        });
+    })();
+
+    // Side rail: highlight the section currently in view.
+    (function initSideRail() {
+        var links = document.querySelectorAll('.side-rail a[data-rail]');
+        var sections = document.querySelectorAll('[data-section]');
+        if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
+
+        var byName = {};
+        links.forEach(function (link) { byName[link.dataset.rail] = link; });
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                links.forEach(function (link) { link.classList.remove('is-active'); });
+                var link = byName[entry.target.dataset.section];
+                if (link) link.classList.add('is-active');
+            });
+        }, { rootMargin: '-40% 0px -50% 0px' });
+
+        sections.forEach(function (section) { observer.observe(section); });
+    })();
+
     // Contact form
     (function initContactForm() {
         var form = document.getElementById('contactForm');

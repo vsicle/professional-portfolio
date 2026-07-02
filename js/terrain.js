@@ -1,6 +1,12 @@
-// terrain.js — wireframe topographic contour mesh evoking the Wasatch.
+// terrain.js — wireframe topographic mountain range evoking the Wasatch front.
 // ES module. Dynamically imported by index.html only when WebGL is available
 // and prefers-reduced-motion is NOT set. Atmosphere, not spectacle.
+//
+// Composition: the viewer stands on the valley floor (Salt Lake side) looking
+// east at a mountain front. Elevation is shaped by a range envelope that rises
+// toward the far edge of the plane, so the skyline reads as one coherent
+// ridgeline instead of undirected noise. Contour lines are drawn per-fragment;
+// peaks catch a faint alpenglow rust.
 import * as THREE from 'three';
 
 const vertexShader = /* glsl */ `
@@ -53,20 +59,20 @@ const vertexShader = /* glsl */ `
         return 130.0 * dot(m, g);
     }
 
-    // Ridged multi-octave fBm: 1.0 - abs(noise) sharpens crests into alpine ridges.
+    // Ridged multi-octave fBm: 1.0 - abs(noise) sharpens crests into ridges.
     float ridged(vec2 p) {
         float sum   = 0.0;
-        float amp   = 0.55;
+        float amp   = 0.62;
         float freq  = 1.0;
         float total = 0.0;
         for (int o = 0; o < 4; o++) {
             float n = snoise(p * freq);
             n = 1.0 - abs(n);
-            n *= n;
+            n = n * n * (0.2 + 0.8 * n); // sharpen crests, soften floors
             sum   += n * amp;
             total += amp;
-            amp   *= 0.5;
-            freq  *= 2.0;
+            amp   *= 0.48;
+            freq  *= 2.05;
         }
         return sum / total;
     }
@@ -74,19 +80,34 @@ const vertexShader = /* glsl */ `
     void main() {
         vUv = uv;
 
-        // Very slow domain drift so the range morphs almost imperceptibly.
-        vec2 drift = vec2(uTime * 0.012, uTime * -0.008);
-        vec2 p = position.xy * 0.42 + drift;
+        // Very slow drift so the range morphs almost imperceptibly.
+        vec2 drift = vec2(uTime * 0.010, uTime * -0.006);
+        vec2 p = position.xy * vec2(0.30, 0.34) + drift;
 
-        // Bias the ridge line so the near edge sits lower than the far skyline.
-        float e = ridged(p);
-        e += ridged(p * 2.7 + 4.1) * 0.18;
-        e *= smoothstep(-5.2, 4.5, position.y) * 0.85 + 0.35;
+        // Range envelope: one coherent ridge SPINE running diagonally
+        // across the plane (SW to NE, like the Wasatch on a quad map).
+        // Elevation belongs to the spine; everything else is valley floor.
+        vec2 q = position.xy;
+        vec2 dir = normalize(vec2(0.88, 0.47));
+        float along  = dot(q, dir);
+        float across = abs(q.x * dir.y - q.y * dir.x);
+        float envelope = 1.0 - smoothstep(0.4, 4.6, across);
+        envelope = envelope * envelope * (3.0 - 2.0 * envelope);
+
+        // Distinct summits and saddles along the spine.
+        float summits = 0.55 + 0.45 * snoise(vec2(along * 0.32 + 2.7, 1.3));
+
+        float detail = ridged(p);
+
+        float e = envelope * summits * (0.3 + 0.9 * detail);
+
+        // Gentle alluvial texture on the valley floor so it isn't dead flat.
+        e += (1.0 - envelope) * 0.05 * snoise(p * 1.8 + 7.0);
 
         vElevation = e;
 
         vec3 displaced = position;
-        displaced.z += e * 2.35;
+        displaced.z += e * 2.4;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
     }
@@ -95,7 +116,7 @@ const vertexShader = /* glsl */ `
 const fragmentShader = /* glsl */ `
     precision highp float;
 
-    uniform vec3  uInk;      // spruce line color
+    uniform vec3  uLine;     // pale contour line color
     uniform vec3  uAccent;   // alpenglow rust (high)
     uniform vec3  uSage;     // contour sage (low)
 
@@ -112,27 +133,27 @@ const fragmentShader = /* glsl */ `
     void main() {
         float elev = vElevation;
 
-        // Minor lines (thin) plus a stronger index line every 5th step.
-        float minorSpacing = 0.045;
-        float minor = contour(elev, minorSpacing, 1.1);
-        float major = contour(elev, minorSpacing * 5.0, 1.35);
+        // Fewer, cleaner lines: minor contours plus an index line every 4th.
+        float minorSpacing = 0.09;
+        float minor = contour(elev, minorSpacing, 1.15);
+        float major = contour(elev, minorSpacing * 4.0, 1.5);
 
-        float line = max(minor * 0.42, major * 0.85);
+        float line = max(minor * 0.62, major * 1.0);
 
-        // Elevation tint: high toward rust alpenglow, low toward sage.
-        float hi = smoothstep(0.55, 0.95, elev);
-        float lo = smoothstep(0.35, 0.02, elev);
-        vec3 col = uInk;
-        col = mix(col, uAccent, hi * 0.55);
+        // Elevation tint: peaks catch rust alpenglow, low ground stays sage.
+        float hi = smoothstep(0.52, 0.95, elev);
+        float lo = smoothstep(0.30, 0.04, elev);
+        vec3 col = uLine;
+        col = mix(col, uAccent, hi * 0.9);
         col = mix(col, uSage,   lo * 0.35);
 
         // Edge vignette in UV space so the plane dissolves into the page.
         vec2 d = abs(vUv - 0.5) * 2.0;
-        float vig = (1.0 - smoothstep(0.55, 1.0, d.x)) *
-                    (1.0 - smoothstep(0.55, 1.0, d.y));
+        float vig = (1.0 - smoothstep(0.5, 0.98, d.x)) *
+                    (1.0 - smoothstep(0.55, 0.98, d.y));
 
-        float alpha = line * vig * 0.9;
-        if (alpha < 0.003) discard;
+        float alpha = line * vig;
+        if (alpha < 0.004) discard;
 
         gl_FragColor = vec4(col, alpha);
     }
@@ -152,7 +173,7 @@ export function mountTerrain(hostElement) {
         alpha: true,
         powerPreference: 'low-power'
     });
-    renderer.setClearColor(0x000000, 0); // no scene background; paper shows through
+    renderer.setClearColor(0x000000, 0); // no scene background; page shows through
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
 
     const canvas = renderer.domElement;
@@ -165,13 +186,14 @@ export function mountTerrain(hostElement) {
 
     const scene = new THREE.Scene();
 
-    // Camera sits low and looks across the mesh like a ridge line at dusk.
-    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    const baseCamPos = new THREE.Vector3(0, 1.15, 7.2);
+    // High oblique view, like reading a topo map tilted on a table.
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    const baseCamPos = new THREE.Vector3(1.2, 8.4, 8.8);
     camera.position.copy(baseCamPos);
-    camera.lookAt(0, 0.35, -3.5);
+    const lookTarget = new THREE.Vector3(0.2, 0, -0.8);
+    camera.lookAt(lookTarget);
 
-    const geometry = new THREE.PlaneGeometry(16, 10, 200, 130);
+    const geometry = new THREE.PlaneGeometry(20, 12, 220, 140);
 
     const material = new THREE.ShaderMaterial({
         vertexShader,
@@ -180,15 +202,15 @@ export function mountTerrain(hostElement) {
         depthWrite: false,
         uniforms: {
             uTime:   { value: 0 },
-            uInk:    { value: new THREE.Color(30 / 255, 42 / 255, 38 / 255) },     // spruce ink
-            uAccent: { value: new THREE.Color(191 / 255, 75 / 255, 38 / 255) },    // rust #bf4b26
-            uSage:   { value: new THREE.Color(159 / 255, 177 / 255, 166 / 255) }   // sage #9fb1a6
+            uLine:   { value: new THREE.Color(0xd9d7cc) }, // pale warm line
+            uAccent: { value: new THREE.Color(0xd0592e) }, // alpenglow rust
+            uSage:   { value: new THREE.Color(0x6f7f74) }  // sage low ground
         }
     });
 
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = -Math.PI / 2 + 0.32; // lie mostly flat, tilt the far edge up
-    mesh.position.y = -0.6;
+    mesh.rotation.x = -Math.PI / 2; // flat map; the shader supplies relief
+    mesh.position.y = 0;
     scene.add(mesh);
 
     // Pointer parallax — tracked on window, lerped, a few degrees max.
@@ -243,9 +265,9 @@ export function mountTerrain(hostElement) {
         // Lerp pointer, apply a mild camera offset/tilt (a few degrees max).
         pointer.x += (target.x - pointer.x) * 0.035;
         pointer.y += (target.y - pointer.y) * 0.035;
-        camera.position.x = baseCamPos.x + pointer.x * 0.55;
-        camera.position.y = baseCamPos.y - pointer.y * 0.28;
-        camera.lookAt(0, 0.35 - pointer.y * 0.12, -3.5);
+        camera.position.x = baseCamPos.x + pointer.x * 0.5;
+        camera.position.y = baseCamPos.y - pointer.y * 0.25;
+        camera.lookAt(lookTarget.x, lookTarget.y - pointer.y * 0.1, lookTarget.z);
 
         renderer.render(scene, camera);
 
