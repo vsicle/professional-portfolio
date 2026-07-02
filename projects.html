@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Vasil Vassilev Software Development Portfolio</title>
-    <meta name="description" content="Explore Vasil Vassilev's software development projects including L3Harris internship work, database design, security research, and full-stack applications.">
+    <meta name="description" content="Explore Vasil Vassilev's software development projects including an industry-sponsored capstone with L3Harris Technologies, database design, security research, and full-stack applications.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     
     <!-- Fonts -->
@@ -192,7 +192,7 @@
                     <div class="text-gray-600">Programming Languages</div>
                 </div>
                 <div class="project-stat rounded-xl p-6 text-center">
-                    <div class="text-3xl font-bold text-purple-600 mb-2">3.820</div>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">3.8</div>
                     <div class="text-gray-600">GPA</div>
                 </div>
                 <div class="project-stat rounded-xl p-6 text-center">
@@ -210,8 +210,8 @@
                 <button class="filter-btn active px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="all">
                     All Projects
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="internship">
-                    Internship
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="capstone">
+                    Capstone
                 </button>
                 <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="database">
                     Database
@@ -234,7 +234,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- L3Harris Project -->
-                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="internship cpp">
+                <div class="project-item project-card rounded-2xl p-6 fade-in-up" data-category="capstone">
                     <div class="mb-4">
                         <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,9 +243,9 @@
                         </div>
                         <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">L3Harris Network Testing Platform</h3>
                         <p class="text-gray-600 mb-6">
-                            Extended capabilities of internal network testing platform responsible for network traffic generation 
-                            and data analysis. Implemented GPS time sync, multi-chassis support, and configurable profiles for 
-                            test data transfer.
+                            Industry-sponsored capstone with L3Harris Technologies: extended an open-source network-testing
+                            platform (Rust, Python) for military satellite communications with a five-engineer team. Owned
+                            GPS time-synchronization validation, the scripting API, and TimescaleDB/Grafana dashboards.
                         </p>
                     </div>
                     
@@ -272,14 +272,14 @@
                     </div>
                     
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">C#</span>
-                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">C++</span>
-                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Network Testing</span>
-                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span>
+                        <span class="tech-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Rust</span>
+                        <span class="tech-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="tech-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">TimescaleDB</span>
+                        <span class="tech-tag bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Grafana</span>
                     </div>
                     
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">L3Harris Technologies • Internship</span>
+                        <span class="text-sm text-gray-500">L3Harris Technologies • Industry-Sponsored Capstone</span>
                         <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="openProjectModal('l3harris')">
                             View Details &rarr;
                         </button>
@@ -349,9 +349,9 @@
                         </div>
                         <h3 class="font-display text-2xl font-semibold mb-3 text-gray-800">Security Vulnerability Research</h3>
                         <p class="text-gray-600 mb-6">
-                            Conducted comprehensive fuzz testing of the Stormlib library using AFL++ and ASAN to discover 
-                            and triage security vulnerabilities. Successfully identified 5 novel security issues and analyzed 
-                            real-world vulnerabilities including buffer overflows and execution redirects.
+                            Co-discovered five memory-safety bugs (buffer overflows and memory corruption) in the StormLib
+                            C++ library using AFL++ and AddressSanitizer with OGHarn-generated fuzzing harnesses. Triaged
+                            crashes in GDB to find root causes; all five were reported upstream and resolved.
                         </p>
                     </div>
                     
@@ -360,19 +360,19 @@
                         <ul class="space-y-2 text-sm text-gray-600">
                             <li class="flex items-center">
                                 <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
-                                Fuzz testing with AFL++ and ASAN
+                                Fuzz testing with AFL++ and AddressSanitizer
                             </li>
                             <li class="flex items-center">
                                 <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
-                                5 novel vulnerabilities discovered
+                                5 memory-safety bugs co-discovered
                             </li>
                             <li class="flex items-center">
                                 <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                                Buffer overflow analysis
+                                OGHarn-generated fuzzing harnesses
                             </li>
                             <li class="flex items-center">
                                 <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                Execution redirect exploitation
+                                Reported upstream and resolved
                             </li>
                         </ul>
                     </div>
@@ -596,7 +596,7 @@
                 <a href="contact.html" class="bg-white text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                     Start a Conversation
                 </a>
-                <a href="Vasil Vassilev Resume.pdf" download data-download-resume class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
+                <a href="Vasil_Vassilev_Resume.pdf" download data-download-resume class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
                     Download Resume
                 </a>
             </div>
@@ -645,27 +645,27 @@
                     <div class="space-y-6">
                         <div>
                             <h3 class="text-xl font-semibold mb-3">Project Overview</h3>
-                            <p class="text-gray-600">As a Software Development Intern at L3Harris Technologies, I worked on extending the capabilities of their internal network testing platform. This critical system is responsible for network traffic generation and data analysis, supporting the company's advanced communication and defense systems.</p>
+                            <p class="text-gray-600">Industry-sponsored capstone with L3Harris Technologies: a five-engineer team extended an open-source network-testing platform (Rust, Python) for military satellite communications, adding multi-chassis coordination on top of the TRex traffic generator. I owned GPS time-synchronization validation, the scripting API for engineer automation, and real-time dashboards on TimescaleDB and Grafana.</p>
                         </div>
                         
                         <div>
                             <h3 class="text-xl font-semibold mb-3">Technical Challenges</h3>
                             <ul class="space-y-2 text-gray-600">
-                                <li>• Implementing GPS time synchronization for microsecond accuracy in distributed testing environments</li>
-                                <li>• Developing configurable profiles for in-band and out-of-band data transfer scenarios</li>
-                                <li>• Adding multi-chassis support to scale testing capabilities across multiple hardware units</li>
-                                <li>• Optimizing network traffic analysis algorithms for real-time performance</li>
+                                <li>• GPS time-synchronization validation for sub-millisecond latency measurement</li>
+                                <li>• Configurable in-band and out-of-band telemetry with automatic failover for unstable satellite links</li>
+                                <li>• Multi-chassis coordination across geographically dispersed networks</li>
+                                <li>• Time-series schema extensions in TimescaleDB to handle multi-chassis data cleanly</li>
                             </ul>
                         </div>
                         
                         <div>
                             <h3 class="text-xl font-semibold mb-3">Technologies Used</h3>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">C#</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">C++</span>
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Network Protocols</span>
-                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">GPS Timing</span>
-                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Multi-threading</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Rust</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">TimescaleDB</span>
+                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">Grafana</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">GitLab CI/CD</span>
                             </div>
                         </div>
                         
@@ -732,16 +732,16 @@ var studentCourses = await _context.Students
                     <div class="space-y-6">
                         <div>
                             <h3 class="text-xl font-semibold mb-3">Research Overview</h3>
-                            <p class="text-gray-600">Conducted comprehensive security analysis of the Stormlib library using advanced fuzzing techniques and vulnerability discovery tools. This research demonstrates deep understanding of cybersecurity principles and practical application of security testing methodologies.</p>
+                            <p class="text-gray-600">Co-discovered five memory-safety bugs (buffer overflows and memory corruption) in the StormLib C++ library through systematic fuzzing with AFL++ and AddressSanitizer, using OGHarn-generated harnesses. All five were reported upstream and resolved by the maintainer.</p>
                         </div>
                         
                         <div>
                             <h3 class="text-xl font-semibold mb-3">Discovery Process</h3>
                             <ul class="space-y-2 text-gray-600">
-                                <li>&bull; Implemented AFL++ (American Fuzzy Lop) for intelligent fuzz testing</li>
+                                <li>&bull; Generated fuzzing harnesses with OGHarn and drove them with AFL++</li>
                                 <li>&bull; Used AddressSanitizer (ASAN) to detect memory corruption issues</li>
-                                <li>&bull; Analyzed and triaged 5 novel security vulnerabilities</li>
-                                <li>&bull; Documented exploitation techniques for educational purposes</li>
+                                <li>&bull; Triaged crash dumps in GDB to find root causes of 5 memory-safety bugs</li>
+                                <li>&bull; Reported all five upstream; fixed by the maintainer</li>
                             </ul>
                         </div>
                         
@@ -753,8 +753,8 @@ var studentCourses = await _context.Students
                                     <p class="text-sm text-red-700">Memory corruption vulnerabilities that could lead to arbitrary code execution</p>
                                 </div>
                                 <div class="bg-orange-50 p-4 rounded-lg">
-                                    <h4 class="font-semibold text-orange-800 mb-2">Execution Redirects</h4>
-                                    <p class="text-sm text-orange-700">Control flow hijacking through manipulated function pointers</p>
+                                    <h4 class="font-semibold text-orange-800 mb-2">Memory Corruption</h4>
+                                    <p class="text-sm text-orange-700">Out-of-bounds reads and writes reachable from untrusted archive input</p>
                                 </div>
                             </div>
                         </div>

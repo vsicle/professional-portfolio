@@ -1,4 +1,4 @@
-const RESUME_PATH = '/Vasil%20Vassilev%20Resume.pdf';
+const RESUME_PATH = '/Vasil_Vassilev_Resume.pdf';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function getSiteUrl(req) {

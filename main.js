@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCopyEmailLinks();
 });
 
-const RESUME_FILE_PATH = 'Vasil Vassilev Resume.pdf';
+const RESUME_FILE_PATH = 'Vasil_Vassilev_Resume.pdf';
 const CONTACT_EMAIL = 'vvassilev515@gmail.com';
 
 // Typewriter effect for hero section
@@ -345,7 +345,6 @@ function formatSubject(subject) {
         'job-opportunity': 'Job Opportunity',
         'freelance-project': 'Freelance Project',
         collaboration: 'Collaboration',
-        internship: 'Internship',
         'general-inquiry': 'General Inquiry'
     };
 

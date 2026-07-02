@@ -17,7 +17,7 @@ Public portfolio site for software development opportunities. The site is a smal
 - `api/contact.js`: contact form email endpoint
 - `api/send-resume.js`: resume request email endpoint
 - `resources/`: site images with public metadata stripped
-- `Vasil Vassilev Resume.pdf`: resume served by the site
+- `Vasil_Vassilev_Resume.pdf`: resume served by the site
 
 ## Local Development
 
