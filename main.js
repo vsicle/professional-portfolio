@@ -29,12 +29,10 @@
         els.forEach(function (el) { observer.observe(el); });
     })();
 
-    // Project rows: hover previews on pointer devices, click pins open.
+    // Project rows: click/tap toggles details open.
     (function initProjectRows() {
         var rows = document.querySelectorAll('.project-row');
         if (!rows.length) return;
-
-        var hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
         rows.forEach(function (row) {
             var head = row.querySelector('.project-head');
@@ -46,17 +44,32 @@
             }
 
             head.addEventListener('click', function () {
-                row.dataset.pinned = row.dataset.pinned === 'true' ? 'false' : 'true';
-                setOpen(row.dataset.pinned === 'true');
+                setOpen(!row.classList.contains('is-open'));
             });
-
-            if (hoverable) {
-                row.addEventListener('mouseenter', function () { setOpen(true); });
-                row.addEventListener('mouseleave', function () {
-                    if (row.dataset.pinned !== 'true') setOpen(false);
-                });
-            }
         });
+    })();
+
+    // Project row reveal: subtle scroll cue, no automatic expansion.
+    (function initProjectRowReveal() {
+        var rows = document.querySelectorAll('.project-row');
+        if (!rows.length) return;
+
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) {
+            rows.forEach(function (row) { row.classList.add('is-visible'); });
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+        rows.forEach(function (row) { observer.observe(row); });
     })();
 
     // Side rail: highlight the section currently in view.
